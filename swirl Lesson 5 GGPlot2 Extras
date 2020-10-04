@@ -1,0 +1,2731 @@
+
+R version 4.0.2 (2020-06-22) -- "Taking Off Again"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> library(swirl)
+
+| Hi! I see that you have some variables saved in your workspace. To keep things
+| running smoothly, I recommend you clean up before starting swirl.
+
+| Type ls() to see a list of the variables in your workspace. Then, type
+| rm(list=ls()) to clear your workspace.
+
+| Type swirl() when you are ready to begin.
+
+> swirl()
+
+| Welcome to swirl! Please sign in. If you've been here before, use the same name
+| as you did then. If you are new, call yourself something unique.
+
+What shall I call you? G
+
+| Would you like to continue with one of these lessons?
+
+1: Exploratory Data Analysis GGPlot2 Part1
+2: No. Let me start something new.
+
+Selection: 1
+
+| Attempting to load lesson dependencies...
+
+| Package ‘ggplot2’ loaded correctly!
+
+
+
+| Before we leave qplot's scatterplotting ability, call qplot again, this time with
+| 3 arguments. The first is y set equal to hwy, the second is data set equal to
+| mpg, and the third is color set equal to drv. Try this now.
+
+> qplot(dlspl, hwy, data=mpg, color=drv)
+Error in FUN(X[[i]], ...) : object 'dlspl' not found
+> qplot(dlsp1, hwy, data=mpg, color=drv)
+Error in FUN(X[[i]], ...) : object 'dlsp1' not found
+> qplot(displ, hwy, data=mpg, color = drv)
+
+| Almost! Try again. Or, type info() for more options.
+
+| Type qplot(y=hwy, data = mpg, color = drv) at the command prompt.
+
+> qplot(y=hwy, data=mpg, color = drv)
+
+| Great job!
+
+  |                                                                               |=================================                                      |  46%
+| What's this plot showing? We see the x-axis ranges from 0 to 250 and we remember
+| that we had 234 data points in our set, so we can infer that each point in the
+| plot represents one of the hwy values (indicated by the y-axis). We've created
+| the vector myhigh for you which contains the hwy data from the mpg dataset. Look
+| at myhigh now.
+
+> myhigh
+  [1] 29 29 31 30 26 26 27 26 25 28 27 25 25 25 25 24 25 23 20 15 20 17 17 26 23 26
+ [27] 25 24 19 14 15 17 27 30 26 29 26 24 24 22 22 24 24 17 22 21 23 23 19 18 17 17
+ [53] 19 19 12 17 15 17 17 12 17 16 18 15 16 12 17 17 16 12 15 16 17 15 17 17 18 17
+ [79] 19 17 19 19 17 17 17 16 16 17 15 17 26 25 26 24 21 22 23 22 20 33 32 32 29 32
+[105] 34 36 36 29 26 27 30 31 26 26 28 26 29 28 27 24 24 24 22 19 20 17 12 19 18 14
+[131] 15 18 18 15 17 16 18 17 19 19 17 29 27 31 32 27 26 26 25 25 17 17 20 18 26 26
+[157] 27 28 25 25 24 27 25 26 23 26 26 26 26 25 27 25 27 20 20 19 17 20 17 29 27 31
+[183] 31 26 26 28 27 29 31 31 26 26 27 30 33 35 37 35 15 18 20 20 22 17 19 18 20 29
+[209] 26 29 29 24 44 29 26 29 29 29 29 23 24 44 41 29 26 28 29 29 29 28 29 26 26 26
+
+| All that hard work is paying off!
+
+  |                                                                               |===================================                                    |  49%
+| Comparing the values of myhigh with the plot, we see the first entries in the
+| vector (29, 29, 31, 30,...) correspond to the leftmost points in the the plot (in
+| order), and the last entries in myhigh (28, 29, 26, 26, 26) correspond to the
+| rightmost plotted points. So, specifying the y parameter only, without an x
+| argument, plots the values of the y argument in the order in which they occur in
+| the data.
+
+...
+
+  |                                                                               |====================================                                   |  51%
+| The all-purpose qplot can also create box and whisker plots.  Call qplot now with
+| 4 arguments. First specify the variable by which you'll split the data, in this
+| case drv, then specify the variable which you want to examine, in this case hwy.
+| The third argument is data (set equal to mpg), and the fourth, the geom, set
+| equal to the string "boxplot"
+
+> qplot(drv, hwy, data=data, geom="boxplot")
+Error:   You're passing a function as global data.
+  Have you misspelled the `data` argument in `ggplot()`
+Run `rlang::last_error()` to see where the error occurred.
+> qplot(split(drv), y=hwy, data=data, geom="boxplot")
+Error:   You're passing a function as global data.
+  Have you misspelled the `data` argument in `ggplot()`
+Run `rlang::last_error()` to see where the error occurred.
+> qplot(drv, hwy, data=mpg, geom="boxplot")
+
+| You are really on a roll!
+
+  |                                                                               |======================================                                 |  54%
+| We see 3 boxes, one for each drive. Now to impress you, call qplot with 5
+| arguments. The first 4 are just as you used previously, (drv, hwy, data set equal
+| to mpg, and geom set equal to the string "boxplot"). Now add a fifth argument,
+| color, equal to manufacturer.
+
+> qplot(drv, hwy, data=mpg, geom="boxplot", color=manufacturer)
+
+| You are really on a roll!
+
+  |                                                                               |========================================                               |  56%
+| It's a little squished but we just wanted to illustrate qplot's capabilities.
+| Notice that there are still 3 regions of the plot (determined by the factor drv).
+| Each is subdivided into several boxes depicting different manufacturers.
+
+...
+
+  |                                                                               |==========================================                             |  59%
+| Now, on to histograms. These display frequency counts for a single variable.
+| Let's start with an easy one. Call qplot with 3 arguments. First specify the
+| variable for which you want the frequency count, in this case hwy, then specify
+| the data (set equal to mpg), and finally, the aesthetic, fill, set equal to drv.
+| Instead of a plain old histogram, this will again use colors to distinguish the 3
+| different drive factors.
+
+> qplot(hwy, data=mpg, geom=drv)
+Error in qplot(hwy, data = mpg, geom = drv) : object 'drv' not found
+> qplot(count, hwy, data=mpg, geom=drv)
+Error in qplot(count, hwy, data = mpg, geom = drv) : 
+  object 'drv' not found
+> qplot
+function (x, y, ..., data, facets = NULL, margins = FALSE, geom = "auto", 
+    xlim = c(NA, NA), ylim = c(NA, NA), log = "", main = NULL, 
+    xlab = NULL, ylab = NULL, asp = NA, stat = NULL, position = NULL) 
+{
+    caller_env <- parent.frame()
+    if (!missing(stat)) 
+        warn("`stat` is deprecated")
+    if (!missing(position)) 
+        warn("`position` is deprecated")
+    if (!is.character(geom)) {
+        abort("`geom` must be a character vector")
+    }
+    exprs <- enquos(x = x, y = y, ...)
+    is_missing <- vapply(exprs, quo_is_missing, logical(1))
+    is_constant <- (!names(exprs) %in% ggplot_global$all_aesthetics) | 
+        vapply(exprs, quo_is_call, logical(1), name = "I")
+    mapping <- new_aes(exprs[!is_missing & !is_constant], env = parent.frame())
+    consts <- exprs[is_constant]
+    aes_names <- names(mapping)
+    mapping <- rename_aes(mapping)
+    if (is.null(xlab)) {
+        xlab <- quo_name(exprs$x)
+    }
+    if (is.null(ylab)) {
+        ylab <- quo_name(exprs$y)
+    }
+    if (missing(data)) {
+        data <- new_data_frame()
+        facetvars <- all.vars(facets)
+        facetvars <- facetvars[facetvars != "."]
+        names(facetvars) <- facetvars
+        facetsdf <- as.data.frame(mget(facetvars, envir = caller_env))
+        if (nrow(facetsdf)) 
+            data <- facetsdf
+    }
+    if ("auto" %in% geom) {
+        if ("sample" %in% aes_names) {
+            geom[geom == "auto"] <- "qq"
+        }
+        else if (missing(y)) {
+            x <- eval_tidy(mapping$x, data, caller_env)
+            if (is.discrete(x)) {
+                geom[geom == "auto"] <- "bar"
+            }
+            else {
+                geom[geom == "auto"] <- "histogram"
+            }
+            if (is.null(ylab)) 
+                ylab <- "count"
+        }
+        else {
+            if (missing(x)) {
+                mapping$x <- quo(seq_along(!!mapping$y))
+            }
+            geom[geom == "auto"] <- "point"
+        }
+    }
+    p <- ggplot(data, mapping, environment = caller_env)
+    if (is.null(facets)) {
+        p <- p + facet_null()
+    }
+    else if (is.formula(facets) && length(facets) == 2) {
+        p <- p + facet_wrap(facets)
+    }
+    else {
+        p <- p + facet_grid(facets = deparse(facets), margins = margins)
+    }
+    if (!is.null(main)) 
+        p <- p + ggtitle(main)
+    for (g in geom) {
+        params <- lapply(consts, eval_tidy)
+        p <- p + do.call(paste0("geom_", g), params)
+    }
+    logv <- function(var) var %in% strsplit(log, "")[[1]]
+    if (logv("x")) 
+        p <- p + scale_x_log10()
+    if (logv("y")) 
+        p <- p + scale_y_log10()
+    if (!is.na(asp)) 
+        p <- p + theme(aspect.ratio = asp)
+    if (!missing(xlab)) 
+        p <- p + xlab(xlab)
+    if (!missing(ylab)) 
+        p <- p + ylab(ylab)
+    if (!missing(xlim)) 
+        p <- p + xlim(xlim)
+    if (!missing(ylim)) 
+        p <- p + ylim(ylim)
+    p
+}
+<bytecode: 0x000000001ba548f8>
+<environment: namespace:ggplot2>
+
+| Nice try, but that's not exactly what I was hoping for. Try again. Or, type
+| info() for more options.
+
+| Type qplot(hwy, data = mpg, fill = drv) at the command prompt.
+
+> qplot(hwy, data = mpg, fill = drv)
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+| Keep up the great work!
+
+  |                                                                               |===========================================                            |  61%
+| See how qplot consistently uses the colors. Red (if 4-wheel drv is in the bin) is
+| at the bottom of the bin, then green on top of it (if present), followed by blue
+| (rear wheel drv). The color lets us see right away that 4-wheel drive vehicles in
+| this dataset don't have gas mileages exceeding 30 miles per gallon.
+
+...
+
+  |                                                                               |=============================================                          |  63%
+| It's cool that qplot can do this so easily, but some people may find this
+| multi-color histogram hard to interpret. Instead of using colors to distinguish
+| between the drive factors let's use facets or panels. (That's what lattice called
+| them.) This just means we'll split the data into 3 subsets (according to drive)
+| and make 3 smaller individual plots of each subset in one plot (and with one call
+| to qplot).
+
+...
+
+  |                                                                               |===============================================                        |  66%
+| Remember that with base plot we had to do each subplot individually. The lattice
+| system made plotting conditioning plots easier. Let's see how easy it is with
+| qplot.
+
+...
+
+  |                                                                               |================================================                       |  68%
+| We'll do two plots, a scatterplot and then a histogram, each with 3 facets. For
+| the scatterplot, call qplot with 4 arguments. The first two are displ and hwy and
+| the third is the argument data set equal to mpg. The fourth is the argument
+| facets which will be set equal to the expression . ~ drv which is ggplot2's
+| shorthand for number of rows (to the left of the ~) and number of columns (to the
+| right of the ~). Here the . indicates a single row and drv implies 3, since there
+| are 3 distinct drive factors. Try this now.
+
+> qplot(displ, hwy, data=mpg, .~drv)
+Error: `mapping` must be created by `aes()`
+Run `rlang::last_error()` to see where the error occurred.
+> qplot(displ, hwy, data=mpg, ~drv)
+Error: `mapping` must be created by `aes()`
+Run `rlang::last_error()` to see where the error occurred.
+> qplot(displ, hwy, data=mpg, expression=drv)
+Error in FUN(X[[i]], ...) : object 'drv' not found
+> qplot(displ, hwy, data=mpg, facets=drv)
+Error in qplot(displ, hwy, data = mpg, facets = drv) : 
+  object 'drv' not found
+> qplot(displ, hwy, data=mpg, facet=drv)
+Error in FUN(X[[i]], ...) : object 'drv' not found
+> qplot(x=displ, y=hwy, data=mpg, facet=drv)
+Error in FUN(X[[i]], ...) : object 'drv' not found
+> qplot(displ, hwy, data=mpg, faces=expression)
+Warning message:
+Ignoring unknown parameters: faces 
+
+| You almost had it, but not quite. Try again. Or, type info() for more options.
+
+| Type qplot(displ, hwy, data = mpg, facets = . ~ drv) at the command prompt.
+
+> qplot(displ, hwy, data=mpg, facets=.~drv)
+
+| You nailed it! Good job!
+
+  |                                                                               |==================================================                     |  71%
+| The result is a 1 by 3 array of plots. Note how each is labeled at the top with
+| the factor label (4,f, or r). This shows us more detailed information than the
+| histogram. We see the relationship between displacement and highway mileage for
+| each of the 3 drive factors.
+
+...
+
+  |                                                                               |====================================================                   |  73%
+| Now we'll do a histogram, again calling qplot with 4 arguments. This time, since
+| we need only one variable for a histogram, the first is hwy and the second is the
+| argument data set equal to mpg. The third is the argument facets which we'll set
+| equal to the expression drv ~ . . This will give us a different arrangement of
+| the facets. The fourth argument is binwidth. Set this equal to 2. Try this now.
+
+> qplot(hwy, data=mpg, facets=drv~, binwidth=2)
+Error: unexpected ',' in "qplot(hwy, data=mpg, facets=drv~,"
+> qplot(hist(hwy, data=mpg, facets=drv~, binwidth=2))
+Error: unexpected ',' in "qplot(hist(hwy, data=mpg, facets=drv~,"
+> qplot(hist(hwy, data=mpg, facets=drv ~, binwidth=2))
+Error: unexpected ',' in "qplot(hist(hwy, data=mpg, facets=drv ~,"
+> qplot(hist(hwy, data = mpg, facets = drv ~, binwidth = 2))
+Error: unexpected ',' in "qplot(hist(hwy, data = mpg, facets = drv ~,"
+> qplot(hwy, data = mpg, facets = drv ~, binwidth = 2)
+Error: unexpected ',' in "qplot(hwy, data = mpg, facets = drv ~,"
+> hist <- qplot(hwy, data = mpg, facets = drv ~, binwidth = 2)
+Error: unexpected ',' in "hist <- qplot(hwy, data = mpg, facets = drv ~,"
+> qplot(hwy, data = mpg, facets = drv ~ , binwidth = 2)
+Error: unexpected ',' in "qplot(hwy, data = mpg, facets = drv ~ ,"
+> qplot(hwy, data = mpg, facets = drv ~ , binwidth(facets = 2)
+Error: unexpected ',' in "qplot(hwy, data = mpg, facets = drv ~ ,"
+> qplot
+function (x, y, ..., data, facets = NULL, margins = FALSE, geom = "auto", 
+    xlim = c(NA, NA), ylim = c(NA, NA), log = "", main = NULL, 
+    xlab = NULL, ylab = NULL, asp = NA, stat = NULL, position = NULL) 
+{
+    caller_env <- parent.frame()
+    if (!missing(stat)) 
+        warn("`stat` is deprecated")
+    if (!missing(position)) 
+        warn("`position` is deprecated")
+    if (!is.character(geom)) {
+        abort("`geom` must be a character vector")
+    }
+    exprs <- enquos(x = x, y = y, ...)
+    is_missing <- vapply(exprs, quo_is_missing, logical(1))
+    is_constant <- (!names(exprs) %in% ggplot_global$all_aesthetics) | 
+        vapply(exprs, quo_is_call, logical(1), name = "I")
+    mapping <- new_aes(exprs[!is_missing & !is_constant], env = parent.frame())
+    consts <- exprs[is_constant]
+    aes_names <- names(mapping)
+    mapping <- rename_aes(mapping)
+    if (is.null(xlab)) {
+        xlab <- quo_name(exprs$x)
+    }
+    if (is.null(ylab)) {
+        ylab <- quo_name(exprs$y)
+    }
+    if (missing(data)) {
+        data <- new_data_frame()
+        facetvars <- all.vars(facets)
+        facetvars <- facetvars[facetvars != "."]
+        names(facetvars) <- facetvars
+        facetsdf <- as.data.frame(mget(facetvars, envir = caller_env))
+        if (nrow(facetsdf)) 
+            data <- facetsdf
+    }
+    if ("auto" %in% geom) {
+        if ("sample" %in% aes_names) {
+            geom[geom == "auto"] <- "qq"
+        }
+        else if (missing(y)) {
+            x <- eval_tidy(mapping$x, data, caller_env)
+            if (is.discrete(x)) {
+                geom[geom == "auto"] <- "bar"
+            }
+            else {
+                geom[geom == "auto"] <- "histogram"
+            }
+            if (is.null(ylab)) 
+                ylab <- "count"
+        }
+        else {
+            if (missing(x)) {
+                mapping$x <- quo(seq_along(!!mapping$y))
+            }
+            geom[geom == "auto"] <- "point"
+        }
+    }
+    p <- ggplot(data, mapping, environment = caller_env)
+    if (is.null(facets)) {
+        p <- p + facet_null()
+    }
+    else if (is.formula(facets) && length(facets) == 2) {
+        p <- p + facet_wrap(facets)
+    }
+    else {
+        p <- p + facet_grid(facets = deparse(facets), margins = margins)
+    }
+    if (!is.null(main)) 
+        p <- p + ggtitle(main)
+    for (g in geom) {
+        params <- lapply(consts, eval_tidy)
+        p <- p + do.call(paste0("geom_", g), params)
+    }
+    logv <- function(var) var %in% strsplit(log, "")[[1]]
+    if (logv("x")) 
+        p <- p + scale_x_log10()
+    if (logv("y")) 
+        p <- p + scale_y_log10()
+    if (!is.na(asp)) 
+        p <- p + theme(aspect.ratio = asp)
+    if (!missing(xlab)) 
+        p <- p + xlab(xlab)
+    if (!missing(ylab)) 
+        p <- p + ylab(ylab)
+    if (!missing(xlim)) 
+        p <- p + xlim(xlim)
+    if (!missing(ylim)) 
+        p <- p + ylim(ylim)
+    p
+}
+<bytecode: 0x000000001ba548f8>
+<environment: namespace:ggplot2>
+
+| Not quite! Try again. Or, type info() for more options.
+
+| Type qplot(hwy, data = mpg, facets = drv ~ ., binwidth = 2) at the command
+| prompt.
+
+> qplot(hwy, data = mpg, facets = drv ~ ., binwidth = 2)
+
+| You got it right!
+
+  |                                                                               |======================================================                 |  76%
+| The facets argument, drv ~ ., resulted in what arrangement of facets?
+
+1: 1 by 3
+2: 2 by 2
+3: huh?
+4: 3 by 1
+
+Selection: 1
+
+| Give it another try.
+
+| How many row? How many columns?
+
+1: 3 by 1
+2: huh?
+3: 1 by 3
+4: 2 by 2
+
+Selection: 3
+
+| You're close...I can feel it! Try it again.
+
+| How many row? How many columns?
+
+1: huh?
+2: 1 by 3
+3: 2 by 2
+4: 3 by 1
+
+Selection: 4
+
+| You nailed it! Good job!
+
+  |                                                                               |=======================================================                |  78%
+| Pretty good, right? Not too difficult either. Let's review what we learned!
+
+...
+
+  |                                                                               |=========================================================              |  80%
+| Which of the following is a basic workhorse function of ggplot2?
+
+1: gplot
+2: xyplot
+3: scatterplot
+4: hist
+5: qplot
+
+Selection: 2
+
+| That's not exactly what I'm looking for. Try again.
+
+| Which function did we invoke the most in this lesson?
+
+1: gplot
+2: hist
+3: scatterplot
+4: xyplot
+5: qplot
+
+Selection: 1
+
+| Almost! Try again.
+
+| Which function did we invoke the most in this lesson?
+
+1: xyplot
+2: gplot
+3: hist
+4: qplot
+5: scatterplot
+
+Selection: 4
+
+| Keep working like that and you'll get there!
+
+  |                                                                               |===========================================================            |  83%
+| Which types of plot does qplot plot?
+
+1: box and whisker plots
+2: all of the others
+3: histograms
+4: scatterplots
+
+Selection: 2
+
+| Excellent work!
+
+  |                                                                               |=============================================================          |  85%
+| What does the gg in ggplot2 stand for?
+
+1: good grief
+2: good graphics
+3: grammar of graphics
+4: goto graphics
+
+Selection: 3
+
+| You are quite good my friend!
+
+  |                                                                               |==============================================================         |  88%
+| True or False? The geom argument takes a string for a value.
+
+1: True
+2: False
+
+Selection: 2
+
+| Not quite! Try again.
+
+| Recall our examples, for instance, geom="density".
+
+1: False
+2: True
+
+Selection: 2
+
+| That's a job well done!
+
+  |                                                                               |================================================================       |  90%
+| True or False? The data argument takes a string for a value.
+
+1: False
+2: True
+
+Selection: 1
+
+| You got it right!
+
+  |                                                                               |==================================================================     |  93%
+| True or False? The binwidth argument takes a string for a value.
+
+1: True
+2: False
+
+Selection: 1
+
+| You almost had it, but not quite. Try again.
+
+| Recall our examples, for instance, binwidth=18497/30.
+
+1: True
+2: False
+
+Selection: 2
+
+| That's the answer I was looking for.
+
+  |                                                                               |====================================================================   |  95%
+| True or False? The user must specify x- and y-axis labels when using qplot.
+
+1: False
+2: True
+
+Selection: 2
+
+| Not quite right, but keep trying.
+
+| Recall our examples when we saw labels that we didn't specify.
+
+1: True
+2: False
+
+Selection: 2
+
+| Keep working like that and you'll get there!
+
+  |                                                                               |=====================================================================  |  98%
+| Congrats! You've finished plot 1 of ggplot2. In the next lesson the plot
+| thickens.
+
+...
+
+  |                                                                               |=======================================================================| 100%
+| Would you like to receive credit for completing this course on Coursera.org?
+
+1: Yes
+2: No
+
+Selection: 1
+What is your email address? soyean111@naver.com
+What is your assignment token? EFJeyd9ESSpSqWVp
+Grade submission succeeded!
+
+| Keep working like that and you'll get there!
+
+| You've reached the end of this lesson! Returning to the main menu...
+
+| Please choose a course, or type 0 to exit swirl.
+
+1: Exploratory Data Analysis
+2: Take me to the swirl course repository!
+
+Selection: 1
+
+| Please choose a lesson, or type 0 to return to course menu.
+
+ 1: Principles of Analytic Graphs   2: Exploratory Graphs           
+ 3: Graphics Devices in R           4: Plotting Systems             
+ 5: Base Plotting System            6: Lattice Plotting System      
+ 7: Working with Colors             8: GGPlot2 Part1                
+ 9: GGPlot2 Part2                  10: GGPlot2 Extras               
+11: Hierarchical Clustering        12: K Means Clustering           
+13: Dimension Reduction            14: Clustering Example           
+15: CaseStudy                      
+
+Selection: 9
+
+| Attempting to load lesson dependencies...
+
+| Package ‘ggplot2’ loaded correctly!
+
+  |                                                                                  |                                                                          |   0%
+
+| GGPlot2_Part2. (Slides for this and other Data Science courses may be found at
+| github https://github.com/DataScienceSpecialization/courses/. If you care to use
+| them, they must be downloaded as a zip file and viewed locally. This lesson
+| corresponds to 04_ExploratoryAnalysis/ggplot2.)
+
+...
+
+  |                                                                                  |==                                                                        |   2%
+| In a previous lesson we showed you the vast capabilities of qplot, the basic
+| workhorse function of the ggplot2 package. In this lesson we'll focus on some
+| fundamental components of the package. These underlie qplot which uses default
+| values when it calls them. If you understand these building blocks, you will be
+| better able to customize your plots. We'll use the second workhorse function in
+| the package, ggplot, as well as other graphing functions.
+
+...
+
+  |                                                                                  |===                                                                       |   4%
+| Do you remember what the gg of ggplot2 stands for?
+
+1: good grief
+2: grammar of graphics
+3: great graphics
+4: goto graphics
+
+Selection: 2
+
+| That's a job well done!
+
+  |                                                                                  |=====                                                                     |   6%
+| A "grammar" of graphics means that ggplot2 contains building blocks with which
+| you can create your own graphical objects. What are these basic components of
+| ggplot2 plots? There are 7 of them.
+
+...
+
+  |                                                                                  |======                                                                    |   8%
+| Obviously, there's a DATA FRAME which contains the data you're trying to plot.
+| Then the AESTHETIC MAPPINGS determine how data are mapped to color, size, etc.
+| The GEOMS (geometric objects) are what you see in the plot (points, lines,
+| shapes) and FACETS are the panels used in conditional plots. You've used these or
+| seen them used in the first ggplot2 (qplot) lesson.
+
+...
+
+  |                                                                                  |========                                                                  |  10%
+| There are 3 more. STATS are statistical transformations such as binning,
+| quantiles, and smoothing which ggplot2 applies to the data. SCALES show what
+| coding an aesthetic map uses (for example, male = red, female = blue). Finally,
+| the plots are depicted on a COORDINATE SYSTEM. When you use qplot these were
+| taken care of for you.
+
+...
+
+  |                                                                                  |=========                                                                 |  12%
+| Do you remember what the "artist's palette" model means in the context of
+| plotting?
+
+1: things get messy
+2: plots are built up in layers
+3: we mix paints
+4: we draw pictures
+
+Selection: 2
+
+| You are quite good my friend!
+
+  |                                                                                  |===========                                                               |  15%
+| As in the base plotting system (and in contrast to the lattice system), when
+| building plots with ggplot2, the plots are built up in layers, maybe in several
+| steps. You can plot the data, then overlay a summary (for instance, a regression
+| line or smoother) and then add any metadata and annotations you need.
+
+...
+
+  |                                                                                  |============                                                              |  17%
+| We'll keep using the mpg data that comes with the ggplot2 package. Recall the
+| versatility of qplot. Just as a refresher, call qplot now with 5 arguments. The
+| first 3 deal with data - displ, hwy, and data=mpg. The fourth is geom set equal
+| to the concatenation of the two strings, "point" and "smooth". The fifth is
+| facets set equal to the formula .~drv. Try this now.
+
+> qplot(data - displ, hwy, data=mpg, geom="point", "smooth", facets=.~drv.)
+Error: `mapping` must be created by `aes()`
+Run `rlang::last_error()` to see where the error occurred.
+> qplot(data - displ, hwy, data=mpg, geom=("point", "smooth"), facets = .~drv.)
+Error: unexpected ',' in "qplot(data - displ, hwy, data=mpg, geom=("point","
+> qplot(displ, hwy, data=mpg, geom=("point", "smooth"), facets = .~drv.)
+Error: unexpected ',' in "qplot(displ, hwy, data=mpg, geom=("point","
+> qplot(displ, hwy, data=mpg, geom=string(c("point", "smooth")), facets = .~drv.)
+Error in string(c("point", "smooth")) : could not find function "string"
+> qplot(displ, hwy, data=mpg, geom=strings("point","smooth"), facets = .~drv.)
+Error in strings("point", "smooth") : could not find function "strings"
+> qplot
+function (x, y, ..., data, facets = NULL, margins = FALSE, geom = "auto", 
+    xlim = c(NA, NA), ylim = c(NA, NA), log = "", main = NULL, 
+    xlab = NULL, ylab = NULL, asp = NA, stat = NULL, position = NULL) 
+{
+    caller_env <- parent.frame()
+    if (!missing(stat)) 
+        warn("`stat` is deprecated")
+    if (!missing(position)) 
+        warn("`position` is deprecated")
+    if (!is.character(geom)) {
+        abort("`geom` must be a character vector")
+    }
+    exprs <- enquos(x = x, y = y, ...)
+    is_missing <- vapply(exprs, quo_is_missing, logical(1))
+    is_constant <- (!names(exprs) %in% ggplot_global$all_aesthetics) | 
+        vapply(exprs, quo_is_call, logical(1), name = "I")
+    mapping <- new_aes(exprs[!is_missing & !is_constant], env = parent.frame())
+    consts <- exprs[is_constant]
+    aes_names <- names(mapping)
+    mapping <- rename_aes(mapping)
+    if (is.null(xlab)) {
+        xlab <- quo_name(exprs$x)
+    }
+    if (is.null(ylab)) {
+        ylab <- quo_name(exprs$y)
+    }
+    if (missing(data)) {
+        data <- new_data_frame()
+        facetvars <- all.vars(facets)
+        facetvars <- facetvars[facetvars != "."]
+        names(facetvars) <- facetvars
+        facetsdf <- as.data.frame(mget(facetvars, envir = caller_env))
+        if (nrow(facetsdf)) 
+            data <- facetsdf
+    }
+    if ("auto" %in% geom) {
+        if ("sample" %in% aes_names) {
+            geom[geom == "auto"] <- "qq"
+        }
+        else if (missing(y)) {
+            x <- eval_tidy(mapping$x, data, caller_env)
+            if (is.discrete(x)) {
+                geom[geom == "auto"] <- "bar"
+            }
+            else {
+                geom[geom == "auto"] <- "histogram"
+            }
+            if (is.null(ylab)) 
+                ylab <- "count"
+        }
+        else {
+            if (missing(x)) {
+                mapping$x <- quo(seq_along(!!mapping$y))
+            }
+            geom[geom == "auto"] <- "point"
+        }
+    }
+    p <- ggplot(data, mapping, environment = caller_env)
+    if (is.null(facets)) {
+        p <- p + facet_null()
+    }
+    else if (is.formula(facets) && length(facets) == 2) {
+        p <- p + facet_wrap(facets)
+    }
+    else {
+        p <- p + facet_grid(facets = deparse(facets), margins = margins)
+    }
+    if (!is.null(main)) 
+        p <- p + ggtitle(main)
+    for (g in geom) {
+        params <- lapply(consts, eval_tidy)
+        p <- p + do.call(paste0("geom_", g), params)
+    }
+    logv <- function(var) var %in% strsplit(log, "")[[1]]
+    if (logv("x")) 
+        p <- p + scale_x_log10()
+    if (logv("y")) 
+        p <- p + scale_y_log10()
+    if (!is.na(asp)) 
+        p <- p + theme(aspect.ratio = asp)
+    if (!missing(xlab)) 
+        p <- p + xlab(xlab)
+    if (!missing(ylab)) 
+        p <- p + ylab(ylab)
+    if (!missing(xlim)) 
+        p <- p + xlim(xlim)
+    if (!missing(ylim)) 
+        p <- p + ylim(ylim)
+    p
+}
+<bytecode: 0x000000001ba548f8>
+<environment: namespace:ggplot2>
+
+| Not quite! Try again. Or, type info() for more options.
+
+| Type qplot(displ, hwy, data = mpg, geom=c("point", "smooth"),facets=.~drv) at the
+| command prompt.
+
+> qplot(displ, hwy, data=mpg, geom=c("point","smooth"), facets = .~drv)
+`geom_smooth()` using method = 'loess' and formula 'y ~ x'
+
+| You're the best!
+
+  |                                                                                  |==============                                                            |  19%
+| We see a 3 facet plot, one for each drive type (4, f, and r). Now we'll see how
+| ggplot works. We'll build up a similar plot using the basic components of the
+| package. We'll do this in a series of steps.
+
+...
+
+  |                                                                                  |===============                                                           |  21%
+| First we'll create a variable g by assigning to it the output of a call to ggplot
+| with 2 arguments. The first is mpg (our dataset) and the second will tell ggplot
+| what we want to plot, in this case, displ and hwy. These are what we want our
+| aesthetics to represent so we enclose these as two arguments to the function aes.
+| Try this now.
+
+> ggplot(mpg, plot(c(displ, hwy)), aes)
+Error in plot(c(displ, hwy)) : object 'displ' not found
+> ggplot
+function (data = NULL, mapping = aes(), ..., environment = parent.frame()) 
+{
+    UseMethod("ggplot")
+}
+<bytecode: 0x000000001b6a71a8>
+<environment: namespace:ggplot2>
+
+| One more time. You can do it! Or, type info() for more options.
+
+| Type g <- ggplot(mpg, aes(displ,hwy) ) at the command prompt.
+
+> g <- ggplot(mpg, aes(displ,hwy) )
+
+| You got it!
+
+  |                                                                                  |=================                                                         |  23%
+| Notice that nothing happened? As in the lattice system, ggplot created a
+| graphical object which we assigned to the variable g.
+
+...
+
+  |                                                                                  |==================                                                        |  25%
+| Run the R command summary with g as its argument to see what g contains.
+
+> g
+
+| Not exactly. Give it another go. Or, type info() for more options.
+
+| Type summary(g) at the command prompt.
+
+> summary(g)
+data: manufacturer, model, displ, year, cyl, trans, drv, cty, hwy, fl,
+  class [234x11]
+mapping:  x = ~displ, y = ~hwy
+faceting: <ggproto object: Class FacetNull, Facet, gg>
+    compute_layout: function
+    draw_back: function
+    draw_front: function
+    draw_labels: function
+    draw_panels: function
+    finish_data: function
+    init_scales: function
+    map_data: function
+    params: list
+    setup_data: function
+    setup_params: function
+    shrink: TRUE
+    train_scales: function
+    vars: function
+    super:  <ggproto object: Class FacetNull, Facet, gg>
+
+| Perseverance, that's the answer.
+
+  |                                                                                  |====================                                                      |  27%
+| So g contains the mpg data with all its named components in a 234 by 11 matrix.
+| It also contains a mapping, x (displ) and y (hwy) which you specified, and no
+| faceting.
+
+...
+
+  |                                                                                  |======================                                                    |  29%
+| Note that if you tried to print g with the expressions g or print(g) you'd get an
+| error! Even though it's a great package, ggplot doesn't know how to display the
+| data yet since you didn't specify how you wanted to see it. Now type
+| g+geom_point() and see what happens.
+
+> g+geom_point()
+
+| You are quite good my friend!
+
+  |                                                                                  |=======================                                                   |  31%
+| By calling the function geom_point you added a layer. By not assigning the
+| expression to a variable you displayed a plot. Notice that you didn't have to
+| pass any arguments to the function geom_point. That's because the object g has
+| all the data stored in it. (Remember you saw that when you ran summary on g
+| before.) Now use the expression you just typed (g + geom_point()) and add to it
+| another layer, a call to geom_smooth(). Notice the red message R gives you.
+
+> (g+geom_point(), geom_smooth())
+Error: unexpected ',' in "(g+geom_point(),"
+> (g+geom_point(geom_smooth()))
+Error: `mapping` must be created by `aes()`
+Run `rlang::last_error()` to see where the error occurred.
+> geom_smooth()
+geom_smooth: na.rm = FALSE, orientation = NA, se = TRUE
+stat_smooth: na.rm = FALSE, orientation = NA, se = TRUE
+position_identity 
+
+| You're close...I can feel it! Try it again. Or, type info() for more options.
+
+| Type g+geom_point()+geom_smooth() at the command prompt.
+
+> g+geom_point + geom_smooth()
+Error: Can't add `geom_point` to a ggplot object.
+Did you forget to add parentheses, as in `geom_point()`?
+Run `rlang::last_error()` to see where the error occurred.
+> g+geom_point()+geom_smooth()
+`geom_smooth()` using method = 'loess' and formula 'y ~ x'
+
+| Keep up the great work!
+
+  |                                                                                  |=========================                                                 |  33%
+| The gray shadow around the blue line is the confidence band. See how wide it is
+| at the right? Let's try a different smoothing function. Use the up arrow to
+| recover the expression you just typed, and instead of calling geom_smooth with no
+| arguments, call it with the argument method set equal to the string "lm".
+
+> geom_smooth = "lm"
+
+| Not quite! Try again. Or, type info() for more options.
+
+| Type g+geom_point()+geom_smooth(method="lm") at the command prompt.
+
+> g+geom_point()+geom_smooth(method="lm")
+`geom_smooth()` using formula 'y ~ x'
+
+| Excellent job!
+
+  |                                                                                  |==========================                                                |  35%
+| By changing the smoothing function to "lm" (linear model) ggplot2 generated a
+| regression line through the data. Now recall the expression you just used and add
+| to it another call, this time to the function facet_grid. Use the formula . ~ drv
+| as it argument. Note that this is the same type of formula used in the calls to
+| qplot.
+
+> qplot(facet_grid, . ~ drv)
+Don't know how to automatically pick scale for object of type function. Defaulting to continuous.
+Don't know how to automatically pick scale for object of type formula. Defaulting to continuous.
+Error: Aesthetics must be valid data columns. Problematic aesthetic(s): x = facet_grid, y = . ~ drv. 
+Did you mistype the name of a data column or forget to add after_stat()?
+Run `rlang::last_error()` to see where the error occurred.
+> rlang::last_error()
+<error/rlang_error>
+Aesthetics must be valid data columns. Problematic aesthetic(s): x = facet_grid, y = . ~ drv. 
+Did you mistype the name of a data column or forget to add after_stat()?
+Backtrace:
+ 1. (function (x, ...) ...
+ 2. ggplot2:::print.ggplot(x)
+ 4. ggplot2:::ggplot_build.ggplot(x)
+ 5. ggplot2:::by_layer(function(l, d) l$compute_aesthetics(d, plot))
+ 6. ggplot2:::f(l = layers[[i]], d = data[[i]])
+ 7. l$compute_aesthetics(d, plot)
+ 8. ggplot2:::f(..., self = self)
+Run `rlang::last_trace()` to see the full context.
+
+| Give it another try. Or, type info() for more options.
+
+| Type g+geom_point()+geom_smooth(method="lm") + facet_grid(.~drv) at the command
+| prompt.
+
+> g+geom_point()+geom_smooth(method="lm")+facet_grid(.~drv)
+`geom_smooth()` using formula 'y ~ x'
+
+| Excellent work!
+
+  |                                                                                  |============================                                              |  38%
+| Notice how each panel is labeled with the appropriate factor. All the data
+| associated with 4-wheel drive cars is in the leftmost panel, front-wheel drive
+| data is shown in the middle panel, and rear-wheel drive data in the rightmost.
+| Notice that this is similar to the plot you created at the start of the lesson
+| using qplot. (We used a different smoothing function than previously.)
+
+...
+
+  |                                                                                  |=============================                                             |  40%
+| So far you've just used the default labels that ggplot provides. You can add your
+| own annotation using functions such as xlab(), ylab(), and ggtitle(). In
+| addition, the function labs() is more general and can be used to label either or
+| both axes as well as provide a title. Now recall the expression you just typed
+| and add a call to the function ggtitle with the argument "Swirl Rules!".
+
+> "Swirl Rules!"
+[1] "Swirl Rules!"
+
+| Not quite! Try again. Or, type info() for more options.
+
+| Type g+geom_point()+geom_smooth(method="lm") + facet_grid(.~drv)+ ggtitle("Swirl
+| Rules!") at the command prompt.
+
+> g+geom_point()+geom_smooth(method="lm")+facet_grid(.~drv)+ggtitle("Swirl Rules!")
+`geom_smooth()` using formula 'y ~ x'
+
+| You are doing so well!
+
+  |                                                                                  |===============================                                           |  42%
+| Now that you've seen the basics we'll talk about customizing. Each of the “geom”
+| functions (e.g., _point and _smooth) has options to modify it. Also, the function
+| theme() can be used to modify aspects of the entire plot, e.g. the position of
+| the legend. Two standard appearance themes are included in ggplot. These are
+| theme_gray() which is the default theme (gray background with white grid lines)
+| and theme_bw() which is a plainer (black and white) color scheme.
+
+...
+
+  |                                                                                  |================================                                          |  44%
+| Let's practice modifying aesthetics now. We'll use the graphic object g that we
+| already filled with mpg data and add a call to the function geom_point, but this
+| time we'll give geom_point 3 arguments. Set the argument color equal to "pink",
+| the argument size to 4, and the argument alpha to 1/2. Notice that all the
+| arguments are set equal to constants.
+
+> geom_point(color = "pink", pch = 4, alpha = 1/2, all = constants)
+Error in layer(data = data, mapping = mapping, stat = stat, geom = GeomPoint,  : 
+  object 'constants' not found
+> geom_point(color = "pink", pch = 4, alpha = 1/2, all = constants)+geom_smooth(method="lm")+facet_grid(.~drv)+ggtitle("Swirl Rules!")
+Error in layer(data = data, mapping = mapping, stat = stat, geom = GeomPoint,  : 
+  object 'constants' not found
+> geom_point(color = "pink", size = 4, alpha = 1/2, all = constants)+geom_smooth(method="lm")+facet_grid(.~drv)+ggtitle("Swirl Rules!")
+Error in layer(data = data, mapping = mapping, stat = stat, geom = GeomPoint,  : 
+  object 'constants' not found
+> geom_point(color = "pink", size = 4, alpha = 1/2)+geom_smooth(method="lm")+facet_grid(.~drv)+ggtitle("Swirl Rules!")
+Error: Cannot add ggproto objects together. Did you forget to add this object to a ggplot object?
+Run `rlang::last_error()` to see where the error occurred.
+> geom_point
+function (mapping = NULL, data = NULL, stat = "identity", 
+    position = "identity", ..., na.rm = FALSE, show.legend = NA, 
+    inherit.aes = TRUE) 
+{
+    layer(data = data, mapping = mapping, stat = stat, geom = GeomPoint, 
+        position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
+        params = list(na.rm = na.rm, ...))
+}
+<bytecode: 0x000000001b7c4850>
+<environment: namespace:ggplot2>
+
+| You almost had it, but not quite. Try again. Or, type info() for more options.
+
+| Type g+geom_point(color="pink",size=4,alpha=1/2) at the command prompt.
+
+> geom_point(color = "pink", pch = 4, alpha = 1/2)
+geom_point: na.rm = FALSE
+stat_identity: na.rm = FALSE
+position_identity 
+
+| Keep trying! Or, type info() for more options.
+
+| Type g+geom_point(color="pink",size=4,alpha=1/2) at the command prompt.
+
+> g+geom_point(color="pink",size=4,alpha=1/2)
+
+| Your dedication is inspiring!
+
+  |                                                                                  |==================================                                        |  46%
+| Notice the different shades of pink? That's the result of the alpha aesthetic
+| which you set to 1/2. This aesthetic tells ggplot how transparent the points
+| should be. Darker circles indicate values hit by multiple data points.
+
+...
+
+  |                                                                                  |===================================                                       |  48%
+| Now we'll modify the aesthetics so that color indicates which drv type each point
+| represents. Again, use g and add to it a call to the function geom_point with 3
+| arguments. The first is size set equal to 4, the second is alpha equal to 1/2.
+| The third is a call to the function aes with the argument color set equal to drv.
+| Note that you MUST use the function aes since the color of the points is data
+| dependent and not a constant as it was in the previous example.
+
+> g+geom_point(color="pink",size=4,alpha=1/2,color=drv)
+Error in layer(data = data, mapping = mapping, stat = stat, geom = GeomPoint,  : 
+  object 'drv' not found
+> g+geom_point(color="pink",size=4,alpha=1/2,color=drv.)
+Error in layer(data = data, mapping = mapping, stat = stat, geom = GeomPoint,  : 
+  object 'drv.' not found
+> g+geom_point(size=4,alpha=1/2,color=drv.)
+Error in layer(data = data, mapping = mapping, stat = stat, geom = GeomPoint,  : 
+  object 'drv.' not found
+> g <- g+geom_point(size=4,alpha=1/2,color=drv.)
+Error in layer(data = data, mapping = mapping, stat = stat, geom = GeomPoint,  : 
+  object 'drv.' not found
+> g+geom_point <- g(size=4,alpha=1/2,color=drv.)
+Error in g(size = 4, alpha = 1/2, color = drv.) : 
+  could not find function "g"
+> geom_point(size=4, alpha=1/2, aes=drv.))
+Error: unexpected ')' in "geom_point(size=4, alpha=1/2, aes=drv.))"
+> geom_point
+function (mapping = NULL, data = NULL, stat = "identity", 
+    position = "identity", ..., na.rm = FALSE, show.legend = NA, 
+    inherit.aes = TRUE) 
+{
+    layer(data = data, mapping = mapping, stat = stat, geom = GeomPoint, 
+        position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
+        params = list(na.rm = na.rm, ...))
+}
+<bytecode: 0x000000001b7c4850>
+<environment: namespace:ggplot2>
+
+| Try again. Getting it right on the first try is boring anyway! Or, type info()
+| for more options.
+
+| Type g + geom_point(aes(color = drv), size = 4, alpha = 1/2) at the command
+| prompt.
+
+> g + geom_point(aes(color = drv), size = 4, alpha = 1/2)
+
+| Excellent work!
+
+  |                                                                                  |=====================================                                     |  50%
+| Notice the helpful legend on the right decoding the relationship between color
+| and drv.
+
+...
+
+  |                                                                                  |=======================================                                   |  52%
+| Now we'll practice modifying labels. Again, we'll use g and add to it calls to 3
+| functions. First, add a call to geom_point with an argument making the color
+| dependent on the drv type (as we did in the previous example). Second, add a call
+| to the function labs with the argument title set equal to "Swirl Rules!".
+| Finally, add a call to labs with 2 arguments, one setting x equal to
+| "Displacement" and the other setting y equal to "Hwy Mileage".
+
+> g + geom+point(aes(color=drv), title="Swirl Rules!")+labs("Displacement", "Hwy Mileage")
+Error: object 'geom' not found
+> g + geom+point(aes(color=drv), title="Swirl Rules!", labs("Displacement", "Hwy Mileage")
++ z
+Error: unexpected symbol in:
+"g + geom+point(aes(color=drv), title="Swirl Rules!", labs("Displacement", "Hwy Mileage")
+z"
+> g + geom+point(aes(color=drv), title="Swirl Rules!", labs("Displacement", "Hwy Mileage"))
+Error: object 'geom' not found
+> g + geom_point(aes(color=drv), title="Swirl Rules!", labs("Displacement", "Hwy Mileage"))
+Error: `data` must be a data frame, or other object coercible by `fortify()`, not an S3 object with class labels
+Run `rlang::last_error()` to see where the error occurred.
+> rlang::last_error()
+<error/rlang_error>
+`data` must be a data frame, or other object coercible by `fortify()`, not an S3 object with class labels
+Backtrace:
+ 1. ggplot2::geom_point(...)
+ 2. ggplot2::layer(...)
+ 4. ggplot2:::fortify.default(data)
+Run `rlang::last_trace()` to see the full context.
+
+| You're close...I can feel it! Try it again. Or, type info() for more options.
+
+| Type g + geom_point(aes(color = drv)) + labs(title="Swirl Rules!") +
+| labs(x="Displacement", y="Hwy Mileage") at the command prompt.
+
+> g + geom_point(aes(color = drv)) + labs(title="Swirl Rules!") + labs(x="Displacement",y="Hwy Mileage")
+
+| You got it!
+
+  |                                                                                  |========================================                                  |  54%
+| Note that you could have combined the two calls to the function labs in the
+| previous example. Now we'll practice customizing the geom_smooth calls. Use g and
+| add to it a call to geom_point setting the color to drv type (remember to use the
+| call to the aes function), size set to 2 and alpha to 1/2. Then add a call to
+| geom_smooth with 4 arguments. Set size equal to 4, linetype to 3, method to "lm",
+| and se to FALSE.
+
+> g + geom_point(aes(color = drv), size = 2, alpha = 1/2) + geom_smooth(size = 4, linetype = 3, method = "lm", se = FALSE)
+`geom_smooth()` using formula 'y ~ x'
+
+| Perseverance, that's the answer.
+
+  |                                                                                  |==========================================                                |  56%
+| What did these arguments do? The method specified a linear regression (note the
+| negative slope indicating that the bigger the displacement the lower the gas
+| mileage), the linetype specified that it should be dashed (not continuous), the
+| size made the dashes big, and the se flag told ggplot to turn off the gray
+| shadows indicating standard errors (confidence intervals).
+
+...
+
+  |                                                                                  |===========================================                               |  58%
+| Finally, let's do a simple plot using the black and white theme, theme_bw.
+| Specify g and add a call to the function geom_point with the argument setting the
+| color to the drv type. Then add a call to the function theme_bw with the argument
+| base_family set equal to "Times". See if you notice the difference.
+
+> g + geom_point(color=drv) + theme_bw(base_family="Times")
+Error in layer(data = data, mapping = mapping, stat = stat, geom = GeomPoint,  : 
+  object 'drv' not found
+> g + geom_point(aes(color = drv)) + theme_bw(base_family="Times")
+There were 13 warnings (use warnings() to see them)
+
+| You are doing so well!
+
+  |                                                                                  |=============================================                             |  60%
+| No more gray background! Also, if you have good eyesight, you'll notice that the
+| font in the labels changed.
+
+...
+
+  |                                                                                  |==============================================                            |  62%
+| One final note before we go through a more complicated, layered ggplot example,
+| and this concerns the limits of the axes. We're pointing this out to emphasize a
+| subtle difference between ggplot and the base plotting function plot.
+
+...
+
+  |                                                                                  |================================================                          |  65%
+| We've created some random x and y data, called myx and myy, components of a
+| dataframe called testdat. These represent 100 random normal points, except
+| halfway through, we made one of the points be an outlier. That is, we set its
+| y-value to be out of range of the other points. Use the base plotting function
+| plot to create a line plot of this data. Call it with 4 arguments - myx, myy,
+| type="l", and ylim=c(-3,3). The type="l" tells plot you want to display the data
+| as a line instead of as a scatterplot.
+
+> plot(myx, myy, type="1", ylim=c(-3,3))
+Error in plot.xy(xy, type, ...) : invalid plot type '1'
+> xyplot(myx, myy, type="1", ylim=c(-3,3))
+Error in xyplot(myx, myy, type = "1", ylim = c(-3, 3)) : 
+  could not find function "xyplot"
+> datafram <- testdat(myx, myy, type="1", ylim=c(-3,3))
+Error in testdat(myx, myy, type = "1", ylim = c(-3, 3)) : 
+  could not find function "testdat"
+> testdat(myx, myy, type="1", ylim=c(-3,3))
+Error in testdat(myx, myy, type = "1", ylim = c(-3, 3)) : 
+  could not find function "testdat"
+> testdat <- plot(myx, myy, type="1", ylim=c(-3,3))
+Error in plot.xy(xy, type, ...) : invalid plot type '1'
+> plot
+function (x, y, ...) 
+UseMethod("plot")
+<bytecode: 0x00000000169719b0>
+<environment: namespace:base>
+
+| Not exactly. Give it another go. Or, type info() for more options.
+
+| Type plot(myx, myy, type = "l", ylim = c(-3,3)) at the command prompt.
+
+> plot(myx, myy, type = "1", ylim = c(-3,3))
+Error in plot.xy(xy, type, ...) : invalid plot type '1'
+> plot(myx, myy, type = "l", ylim = c(-3,3))
+
+| Great job!
+
+  |                                                                                  |=================================================                         |  67%
+| Notice how plot plotted the points in the (-3,3) range for y-values. The outlier
+| at (50,100) is NOT shown on the line plot. Now we'll plot the same data with
+| ggplot. Recall that the name of the dataframe is testdat. Create the graphical
+| object g with a call to ggplot with 2 arguments, testdat (the data) and a call to
+| aes with 2 arguments, x set equal to myx, and y set equal to myy.
+
+> ggplot(testdat, aes(x=mys, y=myy))
+Error in FUN(X[[i]], ...) : object 'mys' not found
+> ggplot(testdat, aes(x=mys, y=myy), type = "1", ylim = c(50,100))
+Error in FUN(X[[i]], ...) : object 'mys' not found
+> ggplot(aes(x=mys, y=myy), type = "1", ylim = c(50,100))
+Error: `data` must be a data frame, or other object coercible by `fortify()`, not an S3 object with class uneval
+Did you accidentally pass `aes()` to the `data` argument?
+Run `rlang::last_error()` to see where the error occurred.
+> rlang::last_error()
+<error/rlang_error>
+`data` must be a data frame, or other object coercible by `fortify()`, not an S3 object with class uneval
+Did you accidentally pass `aes()` to the `data` argument?
+Backtrace:
+ 1. ggplot2::ggplot(...)
+ 2. ggplot2:::ggplot.default(...)
+ 4. ggplot2:::fortify.default(data, ...)
+Run `rlang::last_trace()` to see the full context.
+
+| You're close...I can feel it! Try it again. Or, type info() for more options.
+
+| Type g <- ggplot(testdat, aes(x = myx, y = myy)) at the command prompt.
+
+> g <- ggplot(testdat, aes(x = myx, y = myy))
+
+| You're the best!
+
+  |                                                                                  |===================================================                       |  69%
+| Now add a call to geom_line with 0 arguments to g.
+
+> geom_line(g)
+Error: `mapping` must be created by `aes()`
+Did you use %>% instead of +?
+Run `rlang::last_error()` to see where the error occurred.
+> geom_line(0)
+Error: `mapping` must be created by `aes()`
+Run `rlang::last_error()` to see where the error occurred.
+> geom_line
+function (mapping = NULL, data = NULL, stat = "identity", 
+    position = "identity", na.rm = FALSE, orientation = NA, 
+    show.legend = NA, inherit.aes = TRUE, ...) 
+{
+    layer(data = data, mapping = mapping, stat = stat, geom = GeomLine, 
+        position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
+        params = list(na.rm = na.rm, orientation = orientation, 
+            ...))
+}
+<bytecode: 0x0000000007eec7c0>
+<environment: namespace:ggplot2>
+
+| Nice try, but that's not exactly what I was hoping for. Try again. Or, type
+| info() for more options.
+
+| Type g + geom_line() at the command prompt.
+
+> g + geom_line()
+
+| That's a job well done!
+
+  |                                                                                  |====================================================                      |  71%
+| Notice how ggplot DID display the outlier point at (50,100). As a result the rest
+| of the data is smashed down so you don't get to see what the bulk of it looks
+| like. The single outlier probably isn't important enough to dominate the graph.
+| How do we get ggplot to behave more like plot in a situation like this?
+
+...
+
+  |                                                                                  |======================================================                    |  73%
+| Let's take a guess that in addition to adding geom_line() to g we also just have
+| to add ylim(-3,3) to it as we did with the call to plot. Try this now to see what
+| happens.
+
+> g <- geom_line(ylim(-3, 3))
+Error: `mapping` must be created by `aes()`
+Run `rlang::last_error()` to see where the error occurred.
+> g <- geom_line() + ylim(-3, 3)
+Error: Cannot add ggproto objects together. Did you forget to add this object to a ggplot object?
+Run `rlang::last_error()` to see where the error occurred.
+> g + geom_line() + ylim(-3, 3)
+
+| You are amazing!
+
+  |                                                                                  |========================================================                  |  75%
+| Notice that by doing this, ggplot simply ignored the outlier point at (50,100).
+| There's a break in the line which isn't very noticeable. Now recall that at the
+| beginning of the lesson we mentioned 7 components of a ggplot plot, one of which
+| was a coordinate system. This is a situation where using a coordinate system
+| would be helpful. Instead of adding ylim(-3,3) to the expression g+geom_line(),
+| add a call to the function coord_cartesian with the argument ylim set equal to
+| c(-3,3).
+
+> g + geom_point(aes(color = drv), size = 2, alpha = 1/2) + geom_smooth(size = 4, linetype = 3, method = "lm", se = FALSE)+ ylim(-3, 3) + g + geom_line() + coord_cartesian=c(-3,3)
+Error: Can't add `g` to a ggplot object.
+Run `rlang::last_error()` to see where the error occurred.
+> g + geom_point(aes(color = drv), size = 2, alpha = 1/2) + geom_smooth(size = 4, linetype = 3, method = "lm", se = FALSE)+ ylim(-3, 3) + geom_line() + coord_cartesian=c(-3,3)
+Error in g + geom_point(aes(color = drv), size = 2, alpha = 1/2) + geom_smooth(size = 4,  : 
+  could not find function "+<-"
+> g + ylim(-3, 3) + g + geom_line() + coord_cartesian=c(-3,3)
+Error: Can't add `g` to a ggplot object.
+Run `rlang::last_error()` to see where the error occurred.
+> rlang::last_error()
+<error/rlang_error>
+Can't add `g` to a ggplot object.
+Backtrace:
+ 1. ggplot2:::`+.gg`(`*tmp*`, g)
+ 2. ggplot2:::add_ggplot(e1, e2, e2name)
+ 4. ggplot2:::ggplot_add.default(object, p, objectname)
+Run `rlang::last_trace()` to see the full context.
+
+| Not quite right, but keep trying. Or, type info() for more options.
+
+| Type g + geom_line() + coord_cartesian(ylim=c(-3,3)) at the command prompt.
+
+> g + geom_line() + coord_cartesian(ylim=c(-3,3))
+
+| Keep up the great work!
+
+  |                                                                                  |=========================================================                 |  77%
+| See the difference? This looks more like the plot produced by the base plot
+| function. The outlier y value at x=50 is not shown, but the plot indicates that
+| it is larger than 3.
+
+...
+
+  |                                                                                  |===========================================================               |  79%
+| We'll close with a more complicated example to show you the full power of ggplot
+| and the entire ggplot2 package. We'll continue to work with the mpg dataset.
+
+...
+
+  |                                                                                  |============================================================              |  81%
+| Start by creating the graphical object g by assigning to it a call to ggplot with
+| 2 arguments. The first is the dataset and the second is a call to the function
+| aes. This call will have 3 arguments, x set equal to displ, y set equal to hwy,
+| and color set equal to factor(year). This last will allow us to distinguish
+| between the two manufacturing years (1999 and 2008) in our data.
+
+> aes(x = displ, y = hwy, color = factor(year), manufacturing = (1999 and 2008))
+Error: unexpected symbol in "aes(x = displ, y = hwy, color = factor(year), manufacturing = (1999 and"
+> ggplot(x = displ, y = hwy, color = factor(year), manufacturing = (1999 and 2008))
+Error: unexpected symbol in "ggplot(x = displ, y = hwy, color = factor(year), manufacturing = (1999 and"
+> ggplot
+function (data = NULL, mapping = aes(), ..., environment = parent.frame()) 
+{
+    UseMethod("ggplot")
+}
+<bytecode: 0x000000001b6a71a8>
+<environment: namespace:ggplot2>
+
+| You almost had it, but not quite. Try again. Or, type info() for more options.
+
+| Type g <- ggplot(mpg,aes(x=displ,y=hwy,color=factor(year))) at the command
+| prompt.
+
+> g <- ggplot(mpg, aes(x=displ, y=hwy, color=factor(year)))
+
+| That's the answer I was looking for.
+
+  |                                                                                  |==============================================================            |  83%
+| Uh oh! Nothing happened. Does g exist? Of course, it just isn't visible yet since
+| you didn't add a layer.
+
+...
+
+  |                                                                                  |===============================================================           |  85%
+| If you typed g at the command line, what would happen?
+
+1: I would have to try this to answer the question
+2: R would return an error in red
+3: a scatterplot would appear with 2 colors of points
+
+Selection: 3
+
+| Not quite, but you're learning! Try again.
+
+| You've told ggplot about the data, but have you told it how to display it?
+
+1: R would return an error in red
+2: a scatterplot would appear with 2 colors of points
+3: I would have to try this to answer the question
+
+Selection: 1
+
+| You are really on a roll!
+
+  |                                                                                  |=================================================================         |  88%
+| We'll build the plot up step by step. First add to g a call to the function
+| geom_point with 0 arguments.
+
+> g + geom_point()
+
+| That's a job well done!
+
+  |                                                                                  |==================================================================        |  90%
+| A simple, yet comfortingly familiar scatterplot appears. Let's make our display a
+| 2 dimensional multi-panel plot. Recall your last command (with the up arrow) and
+| add to it a call the function facet_grid. Give it 2 arguments. The first is the
+| formula drv~cyl, and the second is the argument margins set equal to TRUE. Try
+| this now.
+
+> g + geom_point() + facet_grid(drv~cyl, margins = TRUE)
+
+| Nice work!
+
+  |                                                                                  |====================================================================      |  92%
+| A 4 by 5 plot, huh? The margins argument tells ggplot to display the marginal
+| totals over each row and column, so instead of seeing 3 rows (the number of drv
+| factors) and 4 columns (the number of cyl factors) we see a 4 by 5 display. Note
+| that the panel in position (4,5) is a tiny version of the scatterplot of the
+| entire dataset.
+
+...
+
+  |                                                                                  |=====================================================================     |  94%
+| Now add to your last command (or retype it if you like to type) a call to
+| geom_smooth with 4 arguments. These are method set to "lm", se set to FALSE, size
+| set to 2, and color set to "black".
+
+> g + geom_point() + facet_grid(drv~cyl, margins = TRUE) + geom_smooth(method = "lm", se = FALSE, size = 2, color = "black")
+`geom_smooth()` using formula 'y ~ x'
+
+| All that practice is paying off!
+
+  |                                                                                  |=======================================================================   |  96%
+| Angry Birds? Finally, add to your last command (or retype it if you like to type)
+| a call to the function labs with 3 arguments. These are x set to "Displacement",
+| y set to "Highway Mileage", and title set to "Swirl Rules!".
+
+> g + geom_point() + facet_grid(drv~cyl, margins = TRUE) + geom_smooth(method = "lm", se = FALSE, size = 2, color = "black") + labs(x = "Displacement", y = "Highway Mileage", title = "Swirl Rules!")
+`geom_smooth()` using formula 'y ~ x'
+
+| That's correct!
+
+  |                                                                                  |========================================================================  |  98%
+| You could have done these labels with separate calls to labs but we thought you'd
+| be sick of this by now. Anyway, congrats! You've concluded part 2 of ggplot2. We
+| hope you got enough mileage out of the lesson. If you like ggplot2 you can do
+| some extras with the extra lesson.
+
+...
+
+  |                                                                                  |==========================================================================| 100%
+| Would you like to receive credit for completing this course on Coursera.org?
+
+1: Yes
+2: No
+
+Selection: 1
+What is your email address? soyean111@naver.com
+What is your assignment token? pZLaWy1j6jsMk0Hi
+Grade submission succeeded!
+
+| You are amazing!
+
+| You've reached the end of this lesson! Returning to the main menu...
+
+| Please choose a course, or type 0 to exit swirl.
+
+1: Exploratory Data Analysis
+2: Take me to the swirl course repository!
+
+Selection: 1
+
+| Please choose a lesson, or type 0 to return to course menu.
+
+ 1: Principles of Analytic Graphs   2: Exploratory Graphs           
+ 3: Graphics Devices in R           4: Plotting Systems             
+ 5: Base Plotting System            6: Lattice Plotting System      
+ 7: Working with Colors             8: GGPlot2 Part1                
+ 9: GGPlot2 Part2                  10: GGPlot2 Extras               
+11: Hierarchical Clustering        12: K Means Clustering           
+13: Dimension Reduction            14: Clustering Example           
+15: CaseStudy                      
+
+Selection: 10
+
+| Attempting to load lesson dependencies...
+
+| Package ‘ggplot2’ loaded correctly!
+
+  |                                                                                  |                                                                          |   0%
+
+| GGPlot2_Extras. (Slides for this and other Data Science courses may be found at
+| github https://github.com/DataScienceSpecialization/courses/. If you care to use
+| them, they must be downloaded as a zip file and viewed locally. This lesson
+| corresponds to 04_ExploratoryAnalysis/ggplot2.)
+
+...
+
+  |                                                                                  |=                                                                         |   2%
+| In this lesson we'll go through a few more qplot examples using diamond data
+| which comes with the ggplot2 package. This data is a little more complicated than
+| the mpg data and it contains information on various characteristics of diamonds.
+
+...
+
+  |                                                                                  |===                                                                       |   4%
+| Run the R command str with the argument diamonds to see what the data looks like.
+
+> str(diamonds)
+tibble [53,940 x 10] (S3: tbl_df/tbl/data.frame)
+ $ carat  : num [1:53940] 0.23 0.21 0.23 0.29 0.31 0.24 0.24 0.26 0.22 0.23 ...
+ $ cut    : Ord.factor w/ 5 levels "Fair"<"Good"<..: 5 4 2 4 2 3 3 3 1 3 ...
+ $ color  : Ord.factor w/ 7 levels "D"<"E"<"F"<"G"<..: 2 2 2 6 7 7 6 5 2 5 ...
+ $ clarity: Ord.factor w/ 8 levels "I1"<"SI2"<"SI1"<..: 2 3 5 4 2 6 7 3 4 5 ...
+ $ depth  : num [1:53940] 61.5 59.8 56.9 62.4 63.3 62.8 62.3 61.9 65.1 59.4 ...
+ $ table  : num [1:53940] 55 61 65 58 58 57 57 55 61 61 ...
+ $ price  : int [1:53940] 326 326 327 334 335 336 336 337 337 338 ...
+ $ x      : num [1:53940] 3.95 3.89 4.05 4.2 4.34 3.94 3.95 4.07 3.87 4 ...
+ $ y      : num [1:53940] 3.98 3.84 4.07 4.23 4.35 3.96 3.98 4.11 3.78 4.05 ...
+ $ z      : num [1:53940] 2.43 2.31 2.31 2.63 2.75 2.48 2.47 2.53 2.49 2.39 ...
+
+| Great job!
+
+  |                                                                                  |====                                                                      |   6%
+| From the output, how many characteristics of diamonds do you think this data
+| contains?
+
+1: 10
+2: 5394
+3: 53950
+4: 53940
+
+Selection: 1
+
+| You are doing so well!
+
+  |                                                                                  |=====                                                                     |   7%
+| From the output of str, how many diamonds are characterized in this dataset?
+
+1: 10
+2: 53950
+3: 53940
+4: 5394
+
+Selection: 3
+
+| Keep up the great work!
+
+  |                                                                                  |=======                                                                   |   9%
+| Now let's plot a histogram of the price of the 53940 diamonds in this dataset.
+| Recall that a histogram requires only one variable of the data, so run the R
+| command qplot with the first argument price and the argument data set equal to
+| diamonds. This will show the frequency of different diamond prices.
+
+> qplot(data=diamonds)
+Error: stat_bin() requires an x or y aesthetic.
+Run `rlang::last_error()` to see where the error occurred.
+> qplot(dataset=diamonds)
+Warning message:
+Ignoring unknown parameters: dataset 
+
+| That's not exactly what I'm looking for. Try again. Or, type info() for more
+| options.
+
+| Type qplot(price,data=diamonds) at the command prompt.
+
+> qplot(price, dataset=diamonds)
+Error in eval_tidy(mapping$x, data, caller_env) : 
+  object 'price' not found
+> qplot(price,dataset=diamonds)
+Error in eval_tidy(mapping$x, data, caller_env) : 
+  object 'price' not found
+> qplot(price,data=diamonds)
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+| You are amazing!
+
+  |                                                                                  |========                                                                  |  11%
+| Not only do you get a histogram, but you also get a message about the binwidth
+| defaulting to range/30. Recall that range refers to the spread or dispersion of the
+| data, in this case price of diamonds. Run the R command range now with
+| diamonds$price as its argument.
+
+> range(diamonds$price)
+[1]   326 18823
+
+| That's correct!
+
+  |                                                                                  |==========                                                                |  13%
+| We see that range returned the minimum and maximum prices, so the diamonds vary in
+| price from $326 to $18823. We've done the arithmetic for you, the range (difference
+| between these two numbers) is $18497.
+
+...
+
+  |                                                                                  |===========                                                               |  15%
+| Rerun qplot now with 3 arguments. The first is price, the second is data set equal
+| to diamonds, and the third is binwidth set equal to 18497/30). (Use the up arrow to
+| save yourself some typing.) See if the plot looks familiar.
+
+> qplot(dataset=diamonds,binwidth=18497/30)
+Warning message:
+Ignoring unknown parameters: dataset 
+
+| Not quite, but you're learning! Try again. Or, type info() for more options.
+
+| Type qplot(price,data=diamonds,binwidth=18497/30) at the command prompt.
+
+> qplot(price,dataset=diamonds,binwidth=18497/30)
+Error in eval_tidy(mapping$x, data, caller_env) : 
+  object 'price' not found
+> qplot(price,data=diamonds,binwidth=18497/30)
+
+| All that practice is paying off!
+
+  |                                                                                  |============                                                              |  17%
+| No more messages in red, but a histogram almost identical to the previous one! If
+| you typed 18497/30 at the command line you would get the result 616.5667. This
+| means that the height of each bin tells you how many diamonds have a price between
+| x and x+617 where x is the left edge of the bin.
+
+...
+
+  |                                                                                  |==============                                                            |  19%
+| We've created a vector containing integers that are multiples of 617 for you. It's
+| called brk. Look at it now.
+
+> brk(617)
+Error in brk(617) : could not find function "brk"
+> brk
+ [1]     0   617  1234  1851  2468  3085  3702  4319  4936  5553  6170  6787  7404
+[14]  8021  8638  9255  9872 10489 11106 11723 12340 12957 13574 14191 14808 15425
+[27] 16042 16659 17276 17893 18510 19127
+
+| Keep working like that and you'll get there!
+
+  |                                                                                  |===============                                                           |  20%
+| We've also created a vector containing the number of diamonds with prices between
+| each pair of adjacent entries of brk. For instance, the first count is the number
+| of diamonds with prices between 0 and $617, and the second is the number of
+| diamonds with prices between $617 and $1234. Look at the vector named counts now.
+
+> brk(diamonds$prices$617, diamonds$prices$1234)
+Error: unexpected numeric constant in "brk(diamonds$prices$617"
+> brk(0~$617, &617~&1234)
+Error: unexpected '$' in "brk(0~$"
+> brk
+ [1]     0   617  1234  1851  2468  3085  3702  4319  4936  5553  6170  6787  7404
+[14]  8021  8638  9255  9872 10489 11106 11723 12340 12957 13574 14191 14808 15425
+[27] 16042 16659 17276 17893 18510 19127
+
+| Give it another try. Or, type info() for more options.
+
+| Type counts at the command prompt.
+
+> counts
+ [1]  4611 13255  5230  4262  3362  2567  2831  2841  2203  1666  1445  1112   987
+[14]   766   796   655   606   553   540   427   429   376   348   338   298   305
+[27]   269   287   227   251    97
+
+| All that hard work is paying off!
+
+  |                                                                                  |================                                                          |  22%
+| See how it matches the histogram you just plotted? So, qplot really works!
+
+...
+
+  |                                                                                  |==================                                                        |  24%
+| You're probably sick of it but rerun qplot again, this time with 4 arguments. The
+| first 3 are the same as the last qplot command you just ran (price, data set equal
+| to diamonds, and binwidth set equal to 18497/30). (Use the up arrow to save
+| yourself some typing.) The fourth argument is fill set equal to cut. The shape of
+| the histogram will be familiar, but it will be more colorful.
+
+> qplot(price,data=diamonds,binwidth=18497/30,fill=cut)
+
+| You are quite good my friend!
+
+  |                                                                                  |===================                                                       |  26%
+| This shows how the counts within each price grouping (bin) are distributed among
+| the different cuts of diamonds. Notice how qplot displays these distributions
+| relative to the cut legend on the right. The fair cut diamonds are at the bottom of
+| each bin, the good cuts are above them, then the very good above them, until the
+| ideal cuts are at the top of each bin. You can quickly see from this display that
+| there are very few fair cut diamonds priced above $5000.
+
+...
+
+  |                                                                                  |=====================                                                     |  28%
+| Now we'll replot the histogram as a density function which will show the proportion
+| of diamonds in each bin. This means that the shape will be similar but the scale on
+| the y-axis will be different since, by definition, the density function is
+| nonnegative everywhere, and the area under the curve is one. To do this, simply
+| call qplot with 3 arguments. The first 2 are price and data (set equal to
+| diamonds). The third is geom which should be set equal to the string "density". Try
+| this now.
+
+> qplot(price,data=diamonds,geom="density")
+
+| You are quite good my friend!
+
+  |                                                                                  |======================                                                    |  30%
+| Notice that the shape is similar to that of the histogram we saw previously. The
+| highest peak is close to 0 on the x-axis meaning that most of the diamonds in the
+| dataset were inexpensive. In general, as prices increase (move right along the
+| x-axis) the number of diamonds (at those prices) decrease. The exception to this is
+| when the price is around $4000; there's a slight increase in frequency. Let's see
+| if cut is responsible for this increase.
+
+...
+
+  |                                                                                  |=======================                                                   |  31%
+| Rerun qplot, this time with 4 arguments. The first 2 are the usual, and the third
+| is geom set equal to "density". The fourth is color set equal to cut. Try this now.
+
+> qplot(price,data=diamonds,geom="density",color=cut)
+
+| Excellent work!
+
+  |                                                                                  |=========================                                                 |  33%
+| See how easily qplot did this? Four of the five cuts have 2 peaks, one at price
+| $1000 and the other between $4000 and $5000. The exception is the Fair cut which
+| has a single peak at $2500. This gives us a little more understanding of the
+| histogram we saw before.
+
+...
+
+  |                                                                                  |==========================                                                |  35%
+| Let's move on to scatterplots. For these we'll need to specify two variables from
+| the diamond dataset.
+
+...
+
+  |                                                                                  |===========================                                               |  37%
+| Let's start with carat and price. Use these as the first 2 arguments of qplot. The
+| third should be data set equal to the dataset. Try this now.
+
+> qplot(carat, price, data=dataset)
+Error in ggplot(data, mapping, environment = caller_env) : 
+  object 'dataset' not found
+> qplot(carat, price, dataset)
+Error in FUN(X[[i]], ...) : object 'dataset' not found
+> qplot(carat, price)
+Error in FUN(X[[i]], ...) : object 'carat' not found
+> qplot
+function (x, y, ..., data, facets = NULL, margins = FALSE, geom = "auto", 
+    xlim = c(NA, NA), ylim = c(NA, NA), log = "", main = NULL, 
+    xlab = NULL, ylab = NULL, asp = NA, stat = NULL, position = NULL) 
+{
+    caller_env <- parent.frame()
+    if (!missing(stat)) 
+        warn("`stat` is deprecated")
+    if (!missing(position)) 
+        warn("`position` is deprecated")
+    if (!is.character(geom)) {
+        abort("`geom` must be a character vector")
+    }
+    exprs <- enquos(x = x, y = y, ...)
+    is_missing <- vapply(exprs, quo_is_missing, logical(1))
+    is_constant <- (!names(exprs) %in% ggplot_global$all_aesthetics) | 
+        vapply(exprs, quo_is_call, logical(1), name = "I")
+    mapping <- new_aes(exprs[!is_missing & !is_constant], env = parent.frame())
+    consts <- exprs[is_constant]
+    aes_names <- names(mapping)
+    mapping <- rename_aes(mapping)
+    if (is.null(xlab)) {
+        xlab <- quo_name(exprs$x)
+    }
+    if (is.null(ylab)) {
+        ylab <- quo_name(exprs$y)
+    }
+    if (missing(data)) {
+        data <- new_data_frame()
+        facetvars <- all.vars(facets)
+        facetvars <- facetvars[facetvars != "."]
+        names(facetvars) <- facetvars
+        facetsdf <- as.data.frame(mget(facetvars, envir = caller_env))
+        if (nrow(facetsdf)) 
+            data <- facetsdf
+    }
+    if ("auto" %in% geom) {
+        if ("sample" %in% aes_names) {
+            geom[geom == "auto"] <- "qq"
+        }
+        else if (missing(y)) {
+            x <- eval_tidy(mapping$x, data, caller_env)
+            if (is.discrete(x)) {
+                geom[geom == "auto"] <- "bar"
+            }
+            else {
+                geom[geom == "auto"] <- "histogram"
+            }
+            if (is.null(ylab)) 
+                ylab <- "count"
+        }
+        else {
+            if (missing(x)) {
+                mapping$x <- quo(seq_along(!!mapping$y))
+            }
+            geom[geom == "auto"] <- "point"
+        }
+    }
+    p <- ggplot(data, mapping, environment = caller_env)
+    if (is.null(facets)) {
+        p <- p + facet_null()
+    }
+    else if (is.formula(facets) && length(facets) == 2) {
+        p <- p + facet_wrap(facets)
+    }
+    else {
+        p <- p + facet_grid(facets = deparse(facets), margins = margins)
+    }
+    if (!is.null(main)) 
+        p <- p + ggtitle(main)
+    for (g in geom) {
+        params <- lapply(consts, eval_tidy)
+        p <- p + do.call(paste0("geom_", g), params)
+    }
+    logv <- function(var) var %in% strsplit(log, "")[[1]]
+    if (logv("x")) 
+        p <- p + scale_x_log10()
+    if (logv("y")) 
+        p <- p + scale_y_log10()
+    if (!is.na(asp)) 
+        p <- p + theme(aspect.ratio = asp)
+    if (!missing(xlab)) 
+        p <- p + xlab(xlab)
+    if (!missing(ylab)) 
+        p <- p + ylab(ylab)
+    if (!missing(xlim)) 
+        p <- p + xlim(xlim)
+    if (!missing(ylim)) 
+        p <- p + ylim(ylim)
+    p
+}
+<bytecode: 0x000000001ba548f8>
+<environment: namespace:ggplot2>
+
+| Give it another try. Or, type info() for more options.
+
+| Type qplot(carat,price,data=diamonds) at the command prompt.
+
+> qplot(carat, price, data=diamonds)
+
+| You're the best!
+
+  |                                                                                  |=============================                                             |  39%
+| We see the positive trend here, as the number of carats increases the price also
+| goes up.
+
+...
+
+  |                                                                                  |==============================                                            |  41%
+| Now rerun the same command, except add a fourth parameter, shape, set equal to cut.
+
+> qplot(carat, price, data=diamonds, shape=cut)
+Warning message:
+Using shapes for an ordinal variable is not advised 
+
+| That's correct!
+
+  |                                                                                  |================================                                          |  43%
+| The same scatterplot appears, except the cuts of the diamonds are distinguished by
+| different symbols. The legend at the right tells you which symbol is associated
+| with each cut. These are small and hard to read, so rerun the same command, except
+| this time instead of setting the argument shape equal to cut, set the argument
+| color equal to cut.
+
+> legend(carat, price, data=diamonds, shape=cut, color=cut)
+Error in legend(carat, price, data = diamonds, shape = cut, color = cut) : 
+  unused arguments (data = diamonds, shape = cut, color = cut)
+> legend(shape=cut, color=cut)
+Error in legend(shape = cut, color = cut) : 
+  unused arguments (shape = cut, color = cut)
+> 
+> legend
+function (x, y = NULL, legend, fill = NULL, col = par("col"), 
+    border = "black", lty, lwd, pch, angle = 45, density = NULL, 
+    bty = "o", bg = par("bg"), box.lwd = par("lwd"), 
+    box.lty = par("lty"), box.col = par("fg"), pt.bg = NA, 
+    cex = 1, pt.cex = cex, pt.lwd = lwd, xjust = 0, yjust = 1, 
+    x.intersp = 1, y.intersp = 1, adj = c(0, 0.5), text.width = NULL, 
+    text.col = par("col"), text.font = NULL, merge = do.lines && 
+        has.pch, trace = FALSE, plot = TRUE, ncol = 1, horiz = FALSE, 
+    title = NULL, inset = 0, xpd, title.col = text.col, title.adj = 0.5, 
+    seg.len = 2) 
+{
+    if (missing(legend) && !missing(y) && (is.character(y) || 
+        is.expression(y))) {
+        legend <- y
+        y <- NULL
+    }
+    mfill <- !missing(fill) || !missing(density)
+    if (!missing(xpd)) {
+        op <- par("xpd")
+        on.exit(par(xpd = op))
+        par(xpd = xpd)
+    }
+    title <- as.graphicsAnnot(title)
+    if (length(title) > 1) 
+        stop("invalid 'title'")
+    legend <- as.graphicsAnnot(legend)
+    n.leg <- if (is.call(legend)) 
+        1
+    else length(legend)
+    if (n.leg == 0) 
+        stop("'legend' is of length 0")
+    auto <- if (is.character(x)) 
+        match.arg(x, c("bottomright", "bottom", "bottomleft", 
+            "left", "topleft", "top", "topright", 
+            "right", "center"))
+    else NA
+    if (is.na(auto)) {
+        xy <- xy.coords(x, y, setLab = FALSE)
+        x <- xy$x
+        y <- xy$y
+        nx <- length(x)
+        if (nx < 1 || nx > 2) 
+            stop("invalid coordinate lengths")
+    }
+    else nx <- 0
+    xlog <- par("xlog")
+    ylog <- par("ylog")
+    rect2 <- function(left, top, dx, dy, density = NULL, angle, 
+        ...) {
+        r <- left + dx
+        if (xlog) {
+            left <- 10^left
+            r <- 10^r
+        }
+        b <- top - dy
+        if (ylog) {
+            top <- 10^top
+            b <- 10^b
+        }
+        rect(left, top, r, b, angle = angle, density = density, 
+            ...)
+    }
+    segments2 <- function(x1, y1, dx, dy, ...) {
+        x2 <- x1 + dx
+        if (xlog) {
+            x1 <- 10^x1
+            x2 <- 10^x2
+        }
+        y2 <- y1 + dy
+        if (ylog) {
+            y1 <- 10^y1
+            y2 <- 10^y2
+        }
+        segments(x1, y1, x2, y2, ...)
+    }
+    points2 <- function(x, y, ...) {
+        if (xlog) 
+            x <- 10^x
+        if (ylog) 
+            y <- 10^y
+        points(x, y, ...)
+    }
+    text2 <- function(x, y, ...) {
+        if (xlog) 
+            x <- 10^x
+        if (ylog) 
+            y <- 10^y
+        text(x, y, ...)
+    }
+    if (trace) {
+        catn <- function(...) do.call(cat, c(lapply(list(...), 
+            formatC), "\n"))
+        fv <- function(...) paste(vapply(lapply(list(...), formatC), 
+            paste, collapse = ",", ""), collapse = ", ")
+    }
+    Cex <- cex * par("cex")
+    if (is.null(text.width)) 
+        text.width <- max(abs(strwidth(legend, units = "user", 
+            cex = cex, font = text.font)))
+    else if (!is.numeric(text.width) || text.width < 0) 
+        stop("'text.width' must be numeric, >= 0")
+    xyc <- xyinch(par("cin"), warn.log = FALSE)
+    xc <- Cex * xyc[1L]
+    yc <- Cex * xyc[2L]
+    if (any(n_ <- xc < 0)) 
+        text.width[n_] <- -text.width[n_]
+    xchar <- xc
+    xextra <- 0
+    yextra <- yc * (y.intersp - 1)
+    ymax <- yc * max(1, strheight(legend, units = "user", 
+        cex = cex)/yc)
+    ychar <- yextra + ymax
+    if (trace) 
+        catn("  xchar=", fv(xchar), "; (yextra, ychar)=", 
+            fv(yextra, ychar))
+    if (mfill) {
+        xbox <- xc * 0.8
+        ybox <- yc * 0.5
+        dx.fill <- max(xbox)
+    }
+    do.lines <- (!missing(lty) && (is.character(lty) || any(lty > 
+        0))) || !missing(lwd)
+    n.legpercol <- if (horiz) {
+        if (ncol != 1) 
+            warning(gettextf("horizontal specification overrides: Number of columns := %d", 
+                n.leg), domain = NA)
+        ncol <- n.leg
+        1
+    }
+    else ceiling(n.leg/ncol)
+    has.pch <- !missing(pch) && length(pch) > 0
+    if (do.lines) {
+        x.off <- if (merge) 
+            -0.7
+        else 0
+    }
+    else if (merge) 
+        warning("'merge = TRUE' has no effect when no line segments are drawn")
+    if (has.pch) {
+        if (is.character(pch) && !is.na(pch[1L]) && nchar(pch[1L], 
+            type = "c") > 1) {
+            if (length(pch) > 1) 
+                warning("not using pch[2..] since pch[1L] has multiple chars")
+            np <- nchar(pch[1L], type = "c")
+            pch <- substr(rep.int(pch[1L], np), 1L:np, 1L:np)
+        }
+        if (!is.character(pch)) 
+            pch <- as.integer(pch)
+    }
+    if (is.na(auto)) {
+        if (xlog) 
+            x <- log10(x)
+        if (ylog) 
+            y <- log10(y)
+    }
+    if (nx == 2) {
+        x <- sort(x)
+        y <- sort(y)
+        left <- x[1L]
+        top <- y[2L]
+        w <- diff(x)
+        h <- diff(y)
+        w0 <- w/ncol
+        x <- mean(x)
+        y <- mean(y)
+        if (missing(xjust)) 
+            xjust <- 0.5
+        if (missing(yjust)) 
+            yjust <- 0.5
+    }
+    else {
+        h <- (n.legpercol + !is.null(title)) * ychar + yc
+        xch1 <- max(xchar)
+        w0 <- text.width + (x.intersp + 1) * xch1
+        if (mfill) 
+            w0 <- w0 + dx.fill
+        if (do.lines) 
+            w0 <- w0 + (seg.len + x.off) * xch1
+        w <- ncol * w0 + 0.5 * xch1
+        if (!is.null(title) && (abs(tw <- strwidth(title, units = "user", 
+            cex = cex) + 0.5 * xchar)) > abs(w)) {
+            xextra <- (tw - w)/2
+            w <- tw
+        }
+        if (is.na(auto)) {
+            left <- x - xjust * w
+            top <- y + (1 - yjust) * h
+        }
+        else {
+            usr <- par("usr")
+            inset <- rep_len(inset, 2)
+            insetx <- inset[1L] * (usr[2L] - usr[1L])
+            left <- switch(auto, bottomright = , topright = , 
+                right = usr[2L] - w - insetx, bottomleft = , 
+                left = , topleft = usr[1L] + insetx, bottom = , 
+                top = , center = (usr[1L] + usr[2L] - w)/2)
+            insety <- inset[2L] * (usr[4L] - usr[3L])
+            top <- switch(auto, bottomright = , bottom = , bottomleft = usr[3L] + 
+                h + insety, topleft = , top = , topright = usr[4L] - 
+                insety, left = , right = , center = (usr[3L] + 
+                usr[4L] + h)/2)
+        }
+    }
+    if (plot && bty != "n") {
+        if (trace) 
+            catn("  rect2(", left, ",", top, ", w=", 
+                w, ", h=", h, ", ...)", sep = "")
+        rect2(left, top, dx = w, dy = h, col = bg, density = NULL, 
+            lwd = box.lwd, lty = box.lty, border = box.col)
+    }
+    xt <- left + xchar + xextra + (w0 * rep.int(0:(ncol - 1), 
+        rep.int(n.legpercol, ncol)))[1L:n.leg]
+    yt <- top - 0.5 * yextra - ymax - (rep.int(1L:n.legpercol, 
+        ncol)[1L:n.leg] - 1 + !is.null(title)) * ychar
+    if (mfill) {
+        if (plot) {
+            if (!is.null(fill)) 
+                fill <- rep_len(fill, n.leg)
+            rect2(left = xt, top = yt + ybox/2, dx = xbox, dy = ybox, 
+                col = fill, density = density, angle = angle, 
+                border = border)
+        }
+        xt <- xt + dx.fill
+    }
+    if (plot && (has.pch || do.lines)) 
+        col <- rep_len(col, n.leg)
+    if (missing(lwd) || is.null(lwd)) 
+        lwd <- par("lwd")
+    if (do.lines) {
+        if (missing(lty) || is.null(lty)) 
+            lty <- 1
+        lty <- rep_len(lty, n.leg)
+        lwd <- rep_len(lwd, n.leg)
+        ok.l <- !is.na(lty) & (is.character(lty) | lty > 0) & 
+            !is.na(lwd)
+        if (trace) 
+            catn("  segments2(", xt[ok.l] + x.off * xchar, 
+                ",", yt[ok.l], ", dx=", seg.len * 
+                  xchar, ", dy=0, ...)")
+        if (plot) 
+            segments2(xt[ok.l] + x.off * xchar, yt[ok.l], dx = seg.len * 
+                xchar, dy = 0, lty = lty[ok.l], lwd = lwd[ok.l], 
+                col = col[ok.l])
+        xt <- xt + (seg.len + x.off) * xchar
+    }
+    if (has.pch) {
+        pch <- rep_len(pch, n.leg)
+        pt.bg <- rep_len(pt.bg, n.leg)
+        pt.cex <- rep_len(pt.cex, n.leg)
+        pt.lwd <- rep_len(pt.lwd, n.leg)
+        ok <- !is.na(pch)
+        if (!is.character(pch)) {
+            ok <- ok & (pch >= 0 | pch <= -32)
+        }
+        else {
+            ok <- ok & nzchar(pch)
+        }
+        x1 <- (if (merge && do.lines) 
+            xt - (seg.len/2) * xchar
+        else xt)[ok]
+        y1 <- yt[ok]
+        if (trace) 
+            catn("  points2(", x1, ",", y1, ", pch=", 
+                pch[ok], ", ...)")
+        if (plot) 
+            points2(x1, y1, pch = pch[ok], col = col[ok], cex = pt.cex[ok], 
+                bg = pt.bg[ok], lwd = pt.lwd[ok])
+    }
+    xt <- xt + x.intersp * xchar
+    if (plot) {
+        if (!is.null(title)) 
+            text2(left + w * title.adj, top - ymax, labels = title, 
+                adj = c(title.adj, 0), cex = cex, col = title.col)
+        text2(xt, yt, labels = legend, adj = adj, cex = cex, 
+            col = text.col, font = text.font)
+    }
+    invisible(list(rect = list(w = w, h = h, left = left, top = top), 
+        text = list(x = xt, y = yt)))
+}
+<bytecode: 0x000000000ebb5de0>
+<environment: namespace:graphics>
+
+| Not quite! Try again. Or, type info() for more options.
+
+| Type qplot(carat,price,data=diamonds, color=cut) at the command prompt.
+
+> qplot(carat, price, data=diamonds, color=cut)
+
+| All that hard work is paying off!
+
+  |                                                                                  |=================================                                         |  44%
+| That's easier to see! Now we'll close with two, more complicated scatterplot
+| examples.
+
+...
+
+  |                                                                                  |==================================                                        |  46%
+| We'll rerun the plot you just did (carat,price,data=diamonds and color=cut) but add
+| an additional parameter. Use geom_smooth with the method set equal to the string
+| "lm".
+
+> qplot(carat, price, data=diamonds, color=cut)+geom_smooth("lm")
+Error: `mapping` must be created by `aes()`
+Run `rlang::last_error()` to see where the error occurred.
+> qplot(carat,price,data=diamonds,color=cut) + geom_smooth(method="lm")
+`geom_smooth()` using formula 'y ~ x'
+
+| You got it!
+
+  |                                                                                  |====================================                                      |  48%
+| Again, we see the same scatterplot, but slightly more compressed and showing 5
+| regression lines, one for each cut of diamonds. It might be hard to see, but around
+| each line is a shadow showing the 95% confidence interval. We see, unsurprisingly,
+| that the better the cut, the steeper (more positive) the slope of the lines.
+
+...
+
+  |                                                                                  |=====================================                                     |  50%
+| Finally, let's rerun that plot you just did qplot(carat,price,data=diamonds,
+| color=cut) + geom_smooth(method="lm") but add one (just one) more argument to
+| qplot. The new argument is facets and it should be set equal to the formula .~cut.
+| Recall that the facets argument indicates we want a multi-panel plot. The symbol to
+| the left of the tilde indicates rows (in this case just one) and the symbol to the
+| right of the tilde indicates columns (in this five, the number of cuts). Try this
+| now.
+
+> qplot(carat,price,data=diamonds,color=cut) + geom_smooth(method="lm") + facets=formula
+Error in qplot(carat, price, data = diamonds, color = cut) + geom_smooth(method = "lm") +  : 
+  object 'carat' not found
+> qplot(carat,price,data=diamonds,color=cut) + geom_smooth(method="lm") + facets=.~cut
+Error in qplot(carat, price, data = diamonds, color = cut) + geom_smooth(method = "lm") +  : 
+  object 'carat' not found
+> qplot(carat,price,data=diamonds,color=cut) + geom_smooth(method="lm") + facets=~cut
+Error in qplot(carat, price, data = diamonds, color = cut) + geom_smooth(method = "lm") +  : 
+  object 'carat' not found
+> qplot(carat,price,data=diamonds,color=cut) + geom_smooth(method="lm")
+`geom_smooth()` using formula 'y ~ x'
+
+| Try again. Getting it right on the first try is boring anyway! Or, type info() for
+| more options.
+
+| Type qplot(carat,price,data=diamonds, color=cut, facets=.~cut) +
+| geom_smooth(method="lm") at the command prompt.
+
+> qplot(carat,price,data=diamonds,color=cut, facets=.~cut) + geom_smooth(method="lm")
+`geom_smooth()` using formula 'y ~ x'
+
+| Keep up the great work!
+
+  |                                                                                  |======================================                                    |  52%
+| Pretty good, right? Not too difficult either. Let's review what we learned!
+
+...
+
+  |                                                                                  |========================================                                  |  54%
+| Which types of plot does qplot plot?
+
+1: all of the others
+2: box and whisker plots
+3: scatterplots
+4: histograms
+
+Selection: 1
+
+| Excellent job!
+
+  |                                                                                  |=========================================                                 |  56%
+| Any and all of the above choices work; qplot is just that good. What does the gg in
+| ggplot2 stand for?
+
+1: good grief
+2: goto graphics
+3: grammar of graphics
+4: good graphics
+
+Selection: 3
+
+| You are really on a roll!
+
+  |                                                                                  |==========================================                                |  57%
+| True or False? The geom argument takes a string for a value.
+
+1: False
+2: True
+
+Selection: 1
+
+| One more time. You can do it!
+
+| Recall our examples, for instance, geom="density".
+
+1: True
+2: False
+
+Selection: 2
+
+| Not quite! Try again.
+
+| Recall our examples, for instance, geom="density".
+
+1: True
+2: False
+
+Selection: 1
+
+| Great job!
+
+  |                                                                                  |============================================                              |  59%
+| True or False? The method argument takes a string for a value.
+
+1: True
+2: False
+
+Selection: 1
+
+| All that practice is paying off!
+
+  |                                                                                  |=============================================                             |  61%
+| True or False? The binwidth argument takes a string for a value.
+
+1: False
+2: True
+
+Selection: 1
+
+| Your dedication is inspiring!
+
+  |                                                                                  |===============================================                           |  63%
+| True or False? The user must specify x- and y-axis labels when using qplot.
+
+1: True
+2: False
+
+Selection: 1
+
+| Keep trying!
+
+| Recall our examples when we saw labels that we didn't specify.
+
+1: False
+2: True
+
+Selection: 1
+
+| Keep up the great work!
+
+  |                                                                                  |================================================                          |  65%
+| Now for some ggplots.
+
+...
+
+  |                                                                                  |=================================================                         |  67%
+| First create a graphical object g by assigning to it the output of a call to the
+| function ggplot with 2 arguments. The first is the dataset diamonds and the second
+| is a call to the function aes with 2 arguments, depth and price. Remember you won't
+| see any result.
+
+> ggplot(data=diamonds, aes(depth,price))
+
+| Not exactly. Give it another go. Or, type info() for more options.
+
+| Type g <- ggplot(diamonds,aes(depth,price)) at the command prompt.
+
+> g <- ggplot(data=diamonds, aes(depth,price))
+
+| That's the answer I was looking for.
+
+  |                                                                                  |===================================================                       |  69%
+| Does g exist? Yes! Type summary with g as an argument to see what it holds.
+
+> g
+
+| Almost! Try again. Or, type info() for more options.
+
+| Type summary(g) at the command prompt.
+
+> summary(g)
+data: carat, cut, color, clarity, depth, table, price, x, y, z [53940x10]
+mapping:  x = ~depth, y = ~price
+faceting: <ggproto object: Class FacetNull, Facet, gg>
+    compute_layout: function
+    draw_back: function
+    draw_front: function
+    draw_labels: function
+    draw_panels: function
+    finish_data: function
+    init_scales: function
+    map_data: function
+    params: list
+    setup_data: function
+    setup_params: function
+    shrink: TRUE
+    train_scales: function
+    vars: function
+    super:  <ggproto object: Class FacetNull, Facet, gg>
+
+| That's correct!
+
+  |                                                                                  |====================================================                      |  70%
+| We see that g holds the entire dataset. Now suppose we want to see a scatterplot of
+| the relationship. Add to g a call to the function geom_point with 1 argument, alpha
+| set equal to 1/3.
+
+> g + geom_point() + alpha=1/3
+Error in g + geom_point() + alpha = 1/3 : could not find function "+<-"
+> g + geom_point(alpha=1/3)
+
+| Keep up the great work!
+
+  |                                                                                  |=====================================================                     |  72%
+| That's somewhat interesting. We see that depth ranges from 43 to 79, but the
+| densest distribution is around 60 to 65. Suppose we want to see if this
+| relationship (between depth and price) is affected by cut or carat. We know cut is
+| a factor with 5 levels (Fair, Good, Very Good, Premium, and Ideal). But carat is
+| numeric and not a discrete factor. Can we do this?
+
+...
+
+  |                                                                                  |=======================================================                   |  74%
+| Of course! That's why we asked. R has a handy command, cut, which allows you to
+| divide your data into sets and label each entry as belonging to one of the sets, in
+| effect creating a new factor. First, we'll have to decide where to cut the data.
+
+...
+
+  |                                                                                  |========================================================                  |  76%
+| Let's divide the data into 3 pockets, so 1/3 of the data falls into each. We'll use
+| the R command quantile to do this. Create the variable cutpoints and assign to it
+| the output of a call to the function quantile with 3 arguments. The first is the
+| data to cut, namely diamonds$carat; the second is a call to the R function seq.
+| This is also called with 3 arguments, (0, 1, and length set equal to 4). The third
+| argument to the call to quantile is the boolean na.rm set equal to TRUE.
+
+> quantile(diamonds$carat, seq(0, 1, length=4), na.ra = TRUE)
+       0% 33.33333% 66.66667%      100% 
+     0.20      0.50      1.00      5.01 
+
+| Try again. Getting it right on the first try is boring anyway! Or, type info() for
+| more options.
+
+| Type cutpoints <- quantile(diamonds$carat,seq(0,1,length=4),na.rm=TRUE) at the
+| command prompt.
+
+> cutpoints <- quantile(diamonds$carat, seq(0, 1, length=4), na.rm = TRUE)
+
+| You got it right!
+
+  |                                                                                  |==========================================================                |  78%
+| Look at cutpoints now to understand what it is.
+
+> cutpoints
+       0% 33.33333% 66.66667%      100% 
+     0.20      0.50      1.00      5.01 
+
+| That's a job well done!
+
+  |                                                                                  |===========================================================               |  80%
+| We see a 4-long vector (explaining why length was set equal to 4). We also see that
+| .2 is the smallest carat size in the dataset and 5.01 is the largest. One third of
+| the diamonds are between .2 and .5 carats and another third are between .5 and 1
+| carat in size. The remaining third are between 1 and 5.01 carats. Now we can use
+| the R command cut to label each of the 53940 diamonds in the dataset as belonging
+| to one of these 3 factors. Create a new name in diamonds, diamonds$car2 by
+| assigning it the output of the call to cut. This command takes 2 arguments,
+| diamonds$carat, which is what we want to cut, and cutpoints, the places where we'll
+| cut.
+
+> qplot(diamonds$car2, diamonds$carat)
+Error: geom_point requires the following missing aesthetics: x
+Run `rlang::last_error()` to see where the error occurred.
+In addition: Warning messages:
+1: Unknown or uninitialised column: `car2`. 
+2: Unknown or uninitialised column: `car2`. 
+> cutpoints <- qplot(diamonds$car2, diamonds$carat)
+
+| One more time. You can do it! Or, type info() for more options.
+
+| Type diamonds$car2 <- cut(diamonds$carat,cutpoints) at the command prompt.
+
+> diamonds&car2 <- cut(diamonds$carat,cutpoints)
+Error in diamonds & car2 <- cut(diamonds$carat, cutpoints) : 
+  could not find function "&<-"
+> diamonds$car2 <- cut(diamonds$carat,cutpoints)
+
+| That's correct!
+
+  |                                                                                  |============================================================              |  81%
+| Now we can continue with our multi-facet plot. First we have to reset g since we
+| changed the dataset (diamonds) it contained (by adding a new column). Assign to g
+| the output of a call to ggplot with 2 arguments. The dataset diamonds is the first,
+| and a call to the function aes with 2 arguments (depth,price) is the second.
+
+> diamonds$car2 <- cut(diamonds$carat,cutpoints), ggplot(data=diamonds, aes(depth,price))
+Error: unexpected ',' in "diamonds$car2 <- cut(diamonds$carat,cutpoints),"
+> diamonds$car2 <- cut(diamonds$carat,cutpoints), data=diamonds, aes(depth,price))
+Error: unexpected ',' in "diamonds$car2 <- cut(diamonds$carat,cutpoints),"
+> g <- dataset
+Error: object 'dataset' not found
+> diamonds$car2 <- cut(diamonds$carat,cutpoints)
+
+| Nice try, but that's not exactly what I was hoping for. Try again. Or, type info()
+| for more options.
+
+| Type g <- ggplot(diamonds,aes(depth,price)) at the command prompt.
+
+> g <- ggplot(diamonds,aes(depth,price))
+
+| Excellent job!
+
+  |                                                                                  |==============================================================            |  83%
+| Now add to g calls to 2 functions. This first is a call to geom_point with the
+| argument alpha set equal to 1/3. The second is a call to the function facet_grid
+| using the formula cut ~ car2 as its argument.
+
+> g <- ggplot(diamonds,aes(depth,price)) + geom_point(alpha=1/3) + facet_grid(cut ~ car2)
+
+| That's not exactly what I'm looking for. Try again. Or, type info() for more
+| options.
+
+| Type g+geom_point(alpha=1/3)+facet_grid(cut~car2) at the command prompt.
+
+> g+geom_point(alpha=1/3)+facet_grid(cut~car2)
+
+| You are amazing!
+
+  |                                                                                  |===============================================================           |  85%
+| We see a multi-facet plot with 5 rows, each corresponding to a cut factor. Not
+| surprising. What is surprising is the number of columns. We were expecting 3 and
+| got 4. Why?
+
+...
+
+  |                                                                                  |================================================================          |  87%
+| The first 3 columns are labeled with the cutpoint boundaries. The fourth is labeled
+| NA and shows us where the data points with missing data (NA or Not Available)
+| occurred. We see that there were only a handful (12 in fact) and they occurred in
+| Very Good, Premium, and Ideal cuts. We created a vector, myd, containing the
+| indices of these datapoints. Look at these entries in diamonds by typing the
+| expression diamonds[myd,]. The myd tells R what rows to show and the empty column
+| entry says to print all the columns.
+
+> g+geom_point(alpha=1/3)+facet_grid(cut~car2) + diamonds[myd,]
+Error in g + geom_point(alpha = 1/3) + facet_grid(cut ~ car2) + diamonds[myd,  : 
+  non-numeric argument to binary operator
+In addition: Warning message:
+Incompatible methods ("+.gg", "Ops.data.frame") for "+" 
+> datapoints <- diamonds[myd,]
+
+| That's not exactly what I'm looking for. Try again. Or, type info() for more
+| options.
+
+| Type diamonds[myd,] at the command prompt.
+
+> diamonds[myd,]
+# A tibble: 12 x 11
+   carat cut       color clarity depth table price     x     y     z car2 
+   <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl> <fct>
+ 1   0.2 Premium   E     SI2      60.2    62   345  3.79  3.75  2.27 <NA> 
+ 2   0.2 Premium   E     VS2      59.8    62   367  3.79  3.77  2.26 <NA> 
+ 3   0.2 Premium   E     VS2      59      60   367  3.81  3.78  2.24 <NA> 
+ 4   0.2 Premium   E     VS2      61.1    59   367  3.81  3.78  2.32 <NA> 
+ 5   0.2 Premium   E     VS2      59.7    62   367  3.84  3.8   2.28 <NA> 
+ 6   0.2 Ideal     E     VS2      59.7    55   367  3.86  3.84  2.3  <NA> 
+ 7   0.2 Premium   F     VS2      62.6    59   367  3.73  3.71  2.33 <NA> 
+ 8   0.2 Ideal     D     VS2      61.5    57   367  3.81  3.77  2.33 <NA> 
+ 9   0.2 Very Good E     VS2      63.4    59   367  3.74  3.71  2.36 <NA> 
+10   0.2 Ideal     E     VS2      62.2    57   367  3.76  3.73  2.33 <NA> 
+11   0.2 Premium   D     VS2      62.3    60   367  3.73  3.68  2.31 <NA> 
+12   0.2 Premium   D     VS2      61.7    60   367  3.77  3.72  2.31 <NA> 
+
+| That's a job well done!
+
+  |                                                                                  |==================================================================        |  89%
+| We see these entries match the plots. Whew - that's a relief. The car2 field is, in
+| fact, NA for these entries, but the carat field shows they each had a carat size of
+| .2. What's going on here?
+
+...
+
+  |                                                                                  |===================================================================       |  91%
+| Actually our plot answers this question. The boundaries for each column appear in
+| the gray labels at the top of each column, and we see that the first column is
+| labeled (0.2,0.5]. This indicates that this column contains data greater than .2
+| and less than or equal to .5. So diamonds with carat size .2 were excluded from the
+| car2 field.
+
+...
+
+  |                                                                                  |=====================================================================     |  93%
+| Finally, recall the last plotting command
+| (g+geom_point(alpha=1/3)+facet_grid(cut~car2)) or retype it if you like and add
+| another call. This one to the function geom_smooth. Pass it 3 arguments, method set
+| equal to the string "lm", size set equal to 3, and color equal to the string
+| "pink".
+
+> g+geom_point(alpha=1/3)+facet_grid(cut~car2) + geom_smooth(method="lm", size = 3, color = "pink")
+`geom_smooth()` using formula 'y ~ x'
+
+| You're the best!
+
+  |                                                                                  |======================================================================    |  94%
+| Nice thick regression lines which are somewhat interesting. You can add labels to
+| the plot if you want but we'll let you experiment on your own.
+
+...
+
+  |                                                                                  |=======================================================================   |  96%
+| Lastly, ggplot2 can, of course, produce boxplots. This final exercise is the sum of
+| 3 function calls. The first call is to ggplot with 2 arguments, diamonds and a call
+| to aes with carat and price as arguments. The second call is to geom_boxplot with
+| no arguments. The third is to facet_grid with one argument, the formula . ~ cut.
+| Try this now.
+
+> g+geom_point(alpha=1/3)+facet_grid(~ cut) + geom_smooth(method="lm", size = 3, color = "pink")
+`geom_smooth()` using formula 'y ~ x'
+
+| Almost! Try again. Or, type info() for more options.
+
+| Type ggplot(diamonds,aes(carat,price))+geom_boxplot()+facet_grid(.~cut) at the
+| command prompt.
+
+> ggplot(diamonds, aes(carat,price)) + geom+boxplot() + facet_grid(.~cut)
+Error: object 'geom' not found
+> ggplot(diamonds,aes(carat,price))+geom_boxplot()+facet_grid(.~cut)
+Warning message:
+Continuous x aesthetic -- did you forget aes(group=...)? 
+
+| You are amazing!
+
+  |                                                                                  |========================================================================= |  98%
+| Yes! A boxplot looking like marshmallows about to be roasted. Well done and
+| congratulations! You've finished this jewel of a lesson. Hope it paid off!
+
+...
+
+  |                                                                                  |==========================================================================| 100%
+| Would you like to receive credit for completing this course on Coursera.org?
+
+1: No
+2: Yes
+
+Selection: 2
+What is your email address? soyean111@naver.com
+What is your assignment token? rVrSyaFSnnlbChid
+Grade submission succeeded!
+
+| All that hard work is paying off!
+
+| You've reached the end of this lesson! Returning to the main menu...
+
+| Please choose a course, or type 0 to exit swirl.
+
+1: Exploratory Data Analysis
+2: Take me to the swirl course repository!
+
+Selection: 
